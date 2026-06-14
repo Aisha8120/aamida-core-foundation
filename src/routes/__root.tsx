@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "أعمدة | Aamida — Ecommerce Operations Agency" },
+      { name: "description", content: "نحوّل بيانات متجرك إلى خطة تشغيل واضحة للنمو. Aamida — operational partner for ecommerce stores." },
+      { name: "author", content: "Aamida" },
+      { property: "og:title", content: "أعمدة | Aamida" },
+      { property: "og:description", content: "Building the operational foundation for sustainable ecommerce growth." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
