@@ -575,10 +575,10 @@ function Pillars() {
             </div>
 
             <div className="relative flex h-[220px] items-end justify-between gap-3 sm:h-[260px] sm:gap-6">
-              {PILLARS.map((p, i) => {
+              {[88, 70, 95, 60, 78].map((h, i) => {
+                const p = PILLARS[i];
                 const Icon = PILLAR_ICONS[i];
-                const targetPct = (STRENGTH[i] / max) * 100;
-                const heightPct = started ? targetPct : 0;
+                const heightPct = started ? h : 0;
                 const isActive = active === i;
                 return (
                   <div
@@ -620,12 +620,6 @@ function Pillars() {
                       }}
                     >
                       <span aria-hidden className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/15 to-transparent" />
-                      <span
-                        className="absolute left-1/2 top-2 -translate-x-1/2 text-[10px] font-semibold text-white/85 transition-opacity"
-                        style={{ opacity: labelsIn ? 1 : 0 }}
-                      >
-                        {STRENGTH[i]}
-                      </span>
                     </button>
                   </div>
                 );
@@ -645,8 +639,8 @@ function Pillars() {
                     onClick={() => setActive(isActive ? null : i)}
                     className="flex flex-1 flex-col items-center gap-1.5 text-center transition"
                     style={{
-                      opacity: labelsIn ? 1 : 0,
-                      transform: labelsIn ? "translateY(0)" : "translateY(6px)",
+                      opacity: started ? 1 : 0,
+                      transform: started ? "translateY(0)" : "translateY(6px)",
                       transition: `opacity 500ms ease ${i * 80}ms, transform 500ms ease ${i * 80}ms`,
                     }}
                     aria-label={p.t}
