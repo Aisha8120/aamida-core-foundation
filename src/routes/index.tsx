@@ -349,7 +349,7 @@ function Header() {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3.5 sm:flex sm:justify-between lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2.5">
           <Logo className="h-7 w-7 shrink-0 text-[#0D1B3E]" />
-          <span className="truncate text-base font-bold tracking-wide text-[#0D1B3E]">{BRAND_AR}</span>
+          <span className="truncate text-base font-bold text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
@@ -476,7 +476,7 @@ function Problems() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
               <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
             </div>
-            <span className="relative text-xs tracking-[0.25em] text-[#F8F7F4]/60">تشخيص</span>
+            <span className="relative text-xs text-[#F8F7F4]/60">تشخيص</span>
             <h2 className="relative mt-3 text-2xl font-bold leading-snug sm:text-3xl lg:text-4xl">
               ما الذي يجعل المتاجر تتعثر؟
             </h2>
@@ -521,10 +521,8 @@ function Problems() {
 // PILLARS
 // ============================================================
 function Pillars() {
-  const STRENGTH = [78, 62, 88, 55, 72];
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
-  const [labelsIn, setLabelsIn] = useState(false);
   const [active, setActive] = useState<number | null>(null);
 
   useEffect(() => {
@@ -535,9 +533,7 @@ function Pillars() {
         for (const e of entries) {
           if (e.isIntersecting) {
             setStarted(true);
-            const tm = window.setTimeout(() => setLabelsIn(true), 5 * 120 + 650);
             io.unobserve(e.target);
-            return () => window.clearTimeout(tm);
           }
         }
       },
@@ -547,14 +543,12 @@ function Pillars() {
     return () => io.disconnect();
   }, []);
 
-  const max = Math.max(...STRENGTH);
-
   return (
     <section id="pillars" ref={sectionRef} className="relative py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">الأعمدة الخمسة</span>
+            <span className="text-xs text-muted-foreground">الأعمدة الخمسة</span>
             <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">
               أعمدة النمو الخمسة
             </h2>
@@ -581,10 +575,10 @@ function Pillars() {
             </div>
 
             <div className="relative flex h-[220px] items-end justify-between gap-3 sm:h-[260px] sm:gap-6">
-              {PILLARS.map((p, i) => {
+              {[88, 70, 95, 60, 78].map((h, i) => {
+                const p = PILLARS[i];
                 const Icon = PILLAR_ICONS[i];
-                const targetPct = (STRENGTH[i] / max) * 100;
-                const heightPct = started ? targetPct : 0;
+                const heightPct = started ? h : 0;
                 const isActive = active === i;
                 return (
                   <div
@@ -626,12 +620,6 @@ function Pillars() {
                       }}
                     >
                       <span aria-hidden className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/15 to-transparent" />
-                      <span
-                        className="absolute left-1/2 top-2 -translate-x-1/2 text-[10px] font-semibold text-white/85 transition-opacity"
-                        style={{ opacity: labelsIn ? 1 : 0 }}
-                      >
-                        {STRENGTH[i]}
-                      </span>
                     </button>
                   </div>
                 );
@@ -651,8 +639,8 @@ function Pillars() {
                     onClick={() => setActive(isActive ? null : i)}
                     className="flex flex-1 flex-col items-center gap-1.5 text-center transition"
                     style={{
-                      opacity: labelsIn ? 1 : 0,
-                      transform: labelsIn ? "translateY(0)" : "translateY(6px)",
+                      opacity: started ? 1 : 0,
+                      transform: started ? "translateY(0)" : "translateY(6px)",
                       transition: `opacity 500ms ease ${i * 80}ms, transform 500ms ease ${i * 80}ms`,
                     }}
                     aria-label={p.t}
@@ -722,7 +710,7 @@ function Journey() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">رحلة التغيير</span>
+            <span className="text-xs text-muted-foreground">رحلة التغيير</span>
             <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
               رحلة الثلاثة أشهر
             </h2>
@@ -740,7 +728,7 @@ function Journey() {
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0D1B3E] text-[10px] font-bold text-[#F8F7F4]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{j.month}</span>
+                  <span className="text-xs text-muted-foreground">{j.month}</span>
                 </div>
                 <h3 className="mt-4 text-xl font-bold text-[#0D1B3E]">{j.title}</h3>
                 <ul className="mt-4 space-y-2.5">
@@ -775,7 +763,7 @@ function SystemService() {
         <div className="grid items-stretch gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
             <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">خدمة مميزة</span>
+              <span className="text-xs text-muted-foreground">خدمة مميزة</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
                 خدمة بناء النظام التشغيلي
               </h2>
@@ -869,7 +857,7 @@ function Why() {
               <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
                 <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
               </div>
-              <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
+              <span className="relative text-xs text-[#F8F7F4]/70">لماذا أعمدة</span>
               <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
                 لماذا أعمدة؟
               </h2>
@@ -924,7 +912,7 @@ function Contact() {
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
             <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">تواصل</span>
+              <span className="text-xs text-muted-foreground">تواصل</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
                 ابدأ رحلة التغيير
               </h2>
