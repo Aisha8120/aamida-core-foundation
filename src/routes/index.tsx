@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode, type SVGProps } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AMEDAH — Operations & Growth Consulting" },
+      { title: "أعمدة | تحليل تشغيلي للمتاجر الإلكترونية" },
       {
         name: "description",
         content:
-          "AMEDAH turns ecommerce store data into a clear operating plan for sustainable growth.",
+          "أعمدة تساعد المتاجر الإلكترونية على فهم وضعها التشغيلي وبناء خطة تنفيذ واضحة تقلل الفوضى وتدعم النمو.",
       },
     ],
   }),
@@ -18,61 +18,62 @@ export const Route = createFileRoute("/")({
 // ============================================================
 // EASY-TO-EDIT CONFIG
 // ============================================================
-const WHATSAPP_NUMBER = "966500000000"; // <-- change here (international format, no +)
-const BRAND = "AMEDAH";
+const WHATSAPP_NUMBER = "966500000000"; // ← غيّر هنا
+const BRAND_AR = "أعمدة";
 
-const PILLAR_LABELS = ["Orders", "Marketing", "Operations", "Returns", "Customers"] as const;
+const PILLARS: { t: string; d: string }[] = [
+  {
+    t: "الطلبات",
+    d: "نراجع دورة الطلب من الإنشاء حتى التسليم: زمن المعالجة، نسب الإلغاء، ودقة التنفيذ.",
+  },
+  {
+    t: "التسويق",
+    d: "نقرأ أداء القنوات والكلفة الفعلية للطلب، ونربط الحملات بمؤشرات تشغيلية لا بأرقام مظهرية.",
+  },
+  {
+    t: "العمليات",
+    d: "نوثّق إجراءات الفريق ونحدد نقاط الاحتكاك التي تستهلك الوقت وتؤخر التنفيذ اليومي.",
+  },
+  {
+    t: "المرتجعات",
+    d: "نحلل أسباب الإرجاع ونصمم آلية معالجة تقلل التكرار وتحمي هامش الربح.",
+  },
+  {
+    t: "العملاء",
+    d: "نقيس تجربة العميل عبر نقاط التواصل، ونربط خدمة العملاء بمؤشرات أداء قابلة للقياس.",
+  },
+];
+
+const PROBLEM_POINTS = [
+  "طلبات كثيرة بدون تنظيم واضح",
+  "تسويق يعمل دون قراءة حقيقية للنتائج",
+  "عمليات يومية تعتمد على الأشخاص لا على النظام",
+  "خدمة عملاء غير مرتبطة بمؤشرات أداء",
+  "قرارات تُتخذ بالانطباع لا بالبيانات",
+];
 
 const SERVICES = [
-  {
-    title: "Operational Diagnosis",
-    desc: "Deep audit of orders, fulfillment, returns, and customer journey to find the real bottlenecks.",
-  },
-  {
-    title: "Growth Operating Plan",
-    desc: "A clear, sequenced plan that turns insights into priorities your team can execute.",
-  },
-  {
-    title: "Process & Workflow Design",
-    desc: "Lean SOPs, ownership maps, and tooling that scale with order volume without chaos.",
-  },
-  {
-    title: "Performance Tracking",
-    desc: "KPI dashboards aligned with operations and growth — not vanity metrics.",
-  },
-  {
-    title: "Embedded Advisory",
-    desc: "We sit beside your team during execution to remove blockers and protect velocity.",
-  },
+  "تحليل تشغيلي شامل للمتجر",
+  "تحديد نقاط القوة والضعف",
+  "بناء خطة تحسين لمدة 3 أشهر",
+  "تنظيم مؤشرات الأداء",
+  "متابعة التنفيذ مع الفريق",
+  "إعداد تقارير واضحة للإدارة",
 ];
 
 const STEPS = [
-  { n: "01", t: "Discover", d: "Data, interviews, and store walkthroughs to map reality." },
-  { n: "02", t: "Diagnose", d: "Identify gaps, root causes, and the highest-leverage moves." },
-  { n: "03", t: "Design", d: "Build a 90-day operating plan with owners and milestones." },
-  { n: "04", t: "Deliver", d: "Implement, measure weekly, and adjust until results compound." },
+  { n: "01", t: "نجمع بيانات المتجر", d: "نطّلع على الأرقام، الأدوات، والإجراءات الحالية." },
+  { n: "02", t: "نحلل الوضع الحالي", d: "نقرأ الفجوات في الأعمدة الخمسة ونوثّق ما يحدث فعلاً." },
+  { n: "03", t: "نحدد الأولويات", d: "نختار المعالجات الأعلى أثراً والأقل تعقيداً للبدء." },
+  { n: "04", t: "نبني خطة التنفيذ", d: "خطة 90 يوماً بمسؤوليات واضحة ونتائج قابلة للقياس." },
+  { n: "05", t: "نتابع النتائج", d: "نراجع الأداء أسبوعياً ونحدّث التوصيات بناءً على البيانات." },
 ];
-
-const METRICS = [
-  { v: 38, suffix: "%", l: "Faster fulfillment", prefix: "−" },
-  { v: 24, suffix: "%", l: "Fewer returns", prefix: "−" },
-  { v: 31, suffix: "%", l: "Higher CSAT", prefix: "+" },
-  { v: 46, suffix: "%", l: "Operational efficiency", prefix: "+" },
-];
-
-const FORM_LABELS = {
-  name: "Full name",
-  store: "Store / Company",
-  email: "Email",
-  msg: "How can we help?",
-  submit: "Send via WhatsApp",
-};
 
 const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 // ============================================================
-// HOOKS
+// HOOK
 // ============================================================
 function useReveal<T extends HTMLElement = HTMLDivElement>() {
   const ref = useRef<T>(null);
@@ -118,18 +119,102 @@ function Reveal({
 }
 
 // ============================================================
+// LINE ICONS
+// ============================================================
+type IconProps = SVGProps<SVGSVGElement>;
+const stroke = {
+  fill: "none" as const,
+  stroke: "currentColor",
+  strokeWidth: 1.5,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+function IBox(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <path d="M3 7l9-4 9 4-9 4-9-4z" />
+      <path d="M3 7v10l9 4 9-4V7" />
+      <path d="M12 11v10" />
+    </svg>
+  );
+}
+function IMega(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <path d="M3 11v2a2 2 0 0 0 2 2h2l8 4V5L7 9H5a2 2 0 0 0-2 2z" />
+      <path d="M18 8a4 4 0 0 1 0 8" />
+    </svg>
+  );
+}
+function ICog(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1A2 2 0 1 1 4.3 17l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8L4.2 7A2 2 0 1 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1A2 2 0 1 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
+    </svg>
+  );
+}
+function IReturn(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <path d="M9 14L4 9l5-5" />
+      <path d="M4 9h11a5 5 0 0 1 5 5v1a5 5 0 0 1-5 5H8" />
+    </svg>
+  );
+}
+function IUsers(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 20a6.5 6.5 0 0 1 13 0" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M16 20a5 5 0 0 1 5.5-5" />
+    </svg>
+  );
+}
+function ICheck(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <path d="M5 12l4 4 10-10" />
+    </svg>
+  );
+}
+function IArrow(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...stroke} {...p}>
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+function IWa(p: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
+      <path d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.36-1.62-1.52-1.89-.16-.27-.02-.41.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.47-.62-.48l-.53-.01c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3 0 1.36.98 2.67 1.12 2.85.14.18 1.94 2.96 4.7 4.15.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32zM12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z" />
+    </svg>
+  );
+}
+
+const PILLAR_ICONS = [IBox, IMega, ICog, IReturn, IUsers];
+
+// ============================================================
 // LANDING PAGE
 // ============================================================
 function LandingPage() {
+  useEffect(() => {
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+  }, []);
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
+    <div dir="rtl" lang="ar" className="relative min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
       <Header />
       <main className="relative">
         <Hero />
-        <Transformation />
+        <Problem />
+        <Pillars />
         <Services />
         <Process />
-        <Results />
+        <Why />
         <Contact />
       </main>
       <Footer />
@@ -149,236 +234,137 @@ function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-white/10 bg-background/70 backdrop-blur-xl"
-          : "border-b border-transparent"
+        scrolled ? "border-b border-[#0D1B3E]/10 bg-[#F8F7F4]/85 backdrop-blur-xl" : ""
       }`}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3.5 sm:flex sm:justify-between lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2.5">
-          <span className="inline-grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground font-bold">
-            A
-          </span>
-          <span className="truncate text-base font-semibold tracking-[0.18em]">{BRAND}</span>
+          <Logo className="h-7 w-7 shrink-0 text-[#0D1B3E]" />
+          <span className="truncate text-base font-bold tracking-wide text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-          <a href="#services" className="hover:text-foreground transition">Services</a>
-          <a href="#process" className="hover:text-foreground transition">Process</a>
-          <a href="#results" className="hover:text-foreground transition">Results</a>
-          <a href="#contact" className="hover:text-foreground transition">Contact</a>
+          <a href="#problem" className="hover:text-[#0D1B3E] transition">المشكلة</a>
+          <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
+          <a href="#services" className="hover:text-[#0D1B3E] transition">ما نقدمه</a>
+          <a href="#process" className="hover:text-[#0D1B3E] transition">طريقة العمل</a>
+          <a href="#contact" className="hover:text-[#0D1B3E] transition">تواصل</a>
         </nav>
         <a
           href="#contact"
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-[0_0_25px_-4px_oklch(0.62_0.21_274_/_0.7)] transition hover:-translate-y-0.5"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#0D1B3E] px-4 py-2 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5"
         >
-          Book a Meeting
+          ابدأ التحليل
         </a>
       </div>
     </header>
   );
 }
 
+function Logo({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 28 28" className={className} {...stroke}>
+      <path d="M5 22V9" />
+      <path d="M10 22V6" />
+      <path d="M15 22V10" />
+      <path d="M20 22V7" />
+      <path d="M3 22h22" />
+    </svg>
+  );
+}
+
 // ============================================================
-// SECTION 1 — HERO (full viewport, pillars rise on mount)
+// HERO
 // ============================================================
 function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden pt-24">
-      <div className="pointer-events-none absolute inset-0 grid-bg opacity-50" />
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.22_275_/_0.4),transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 soft-grid opacity-90" />
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-5 pb-20 text-center lg:px-8">
-        <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Operations & Growth Consulting
-        </div>
-
-        <h1
-          className="animate-fade-up mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
-          style={{ animationDelay: "100ms" }}
-        >
-          <span className="text-gradient">The operating foundation</span>
-          <br />
-          <span className="text-gradient">for sustainable growth.</span>
-        </h1>
-
-        <p
-          className="animate-fade-up mt-5 max-w-xl text-base text-muted-foreground sm:text-lg"
-          style={{ animationDelay: "220ms" }}
-        >
-          {BRAND} turns ecommerce store data into a clear, executable operating plan — so growth
-          stops creating chaos and starts compounding.
-        </p>
-
-        <div
-          className="animate-fade-up mt-7 flex flex-wrap items-center justify-center gap-3"
-          style={{ animationDelay: "320ms" }}
-        >
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-[0_0_35px_-4px_oklch(0.62_0.21_274_/_0.7)] transition hover:-translate-y-0.5"
-          >
-            Book a Meeting
-          </a>
-          <a
-            href={waLink(`Hello ${BRAND}, I'd like to book an initial consultation.`)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium backdrop-blur transition hover:bg-white/10 hover:-translate-y-0.5"
-          >
-            WhatsApp
-          </a>
-        </div>
-
-        {/* Five vertical pillars */}
-        <div className="mt-14 flex w-full max-w-2xl items-end justify-center gap-3 sm:gap-5">
-          {PILLAR_LABELS.map((_, i) => (
-            <div
-              key={i}
-              className="animate-pillar relative h-32 w-12 origin-bottom rounded-t-md bg-gradient-to-b from-primary to-[oklch(0.32_0.12_275)] sm:h-44 sm:w-16"
-              style={{
-                animationDelay: `${500 + i * 110}ms`,
-                boxShadow:
-                  "inset 0 1px 0 oklch(1 0 0 / 0.25), 0 20px 60px -20px oklch(0.55 0.22 275 / 0.6)",
-              }}
-            >
-              <span className="absolute -top-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-white/80" />
-            </div>
-          ))}
-        </div>
-        <div className="mt-3 h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-        <a
-          href="#transformation"
-          className="mt-10 text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-foreground"
-        >
-          scroll
-        </a>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================
-// SECTION 2 — TRANSFORMATION (pillars morph into 5 business pillars)
-// ============================================================
-function Transformation() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [p, setP] = useState(0);
-
-  useEffect(() => {
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const el = wrapRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        const total = el.offsetHeight - vh;
-        const scrolled = Math.min(Math.max(-rect.top, 0), total);
-        setP(total > 0 ? scrolled / total : 0);
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  // Headline crossfade
-  const introOpacity = Math.max(0, 1 - p * 2.2);
-  const namedOpacity = Math.max(0, Math.min(1, (p - 0.35) * 2.4));
-
-  return (
-    <section
-      id="transformation"
-      ref={wrapRef}
-      className="relative"
-      style={{ height: "200vh" }} /* 100vh sticky pin + 100vh of scroll progress */
-    >
-      <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 grid-bg opacity-30" />
-
-        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-5 text-center lg:px-8">
-          {/* Headlines stacked */}
-          <div className="relative h-16 w-full">
-            <h2
-              className="absolute inset-0 text-2xl font-semibold sm:text-4xl"
-              style={{ opacity: introOpacity, transform: `translateY(${-p * 30}px)` }}
-            >
-              Five pillars hold every ecommerce store.
-            </h2>
-            <h2
-              className="absolute inset-0 text-2xl font-semibold sm:text-4xl"
-              style={{
-                opacity: namedOpacity,
-                transform: `translateY(${(1 - namedOpacity) * 30}px)`,
-              }}
-            >
-              <span className="text-gradient">Orders. Marketing. Operations. Returns. Customers.</span>
-            </h2>
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-16 lg:grid-cols-[1.15fr_1fr] lg:px-8">
+        <div className="text-right">
+          <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-[#0D1B3E]/15 bg-white/60 px-3 py-1 text-xs text-[#0D1B3E]/80 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
+            تحليل تشغيلي للمتاجر الإلكترونية
           </div>
-
+          <h1
+            className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
+            style={{ animationDelay: "100ms" }}
+          >
+            نحو متجر يعمل بوضوح…
+            <br />
+            لا بعشوائية
+          </h1>
           <p
-            className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base"
-            style={{ opacity: 0.5 + p * 0.5 }}
+            className="animate-fade-up mt-6 max-w-xl text-base leading-loose text-muted-foreground sm:text-lg"
+            style={{ animationDelay: "220ms" }}
           >
-            When one weakens, the whole store wobbles. {BRAND} builds them deliberately.
+            في {BRAND_AR} نساعد المتاجر الإلكترونية على فهم وضعها الحالي، كشف نقاط الضعف، وتنظيم
+            العمليات اليومية من خلال تحليل تشغيلي واضح وخطة تنفيذ قابلة للتطبيق.
           </p>
+          <div
+            className="animate-fade-up mt-8 flex flex-wrap gap-3"
+            style={{ animationDelay: "320ms" }}
+          >
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0D1B3E] px-6 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5"
+            >
+              ابدأ تحليل متجرك
+              <IArrow className="h-4 w-4 rotate-180" />
+            </a>
+            <a
+              href={waLink(`السلام عليكم، أرغب بتحليل متجري عبر ${BRAND_AR}.`)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#0D1B3E]/20 bg-white px-6 py-3 text-sm font-medium text-[#0D1B3E] transition hover:bg-[#0D1B3E]/5 hover:-translate-y-0.5"
+            >
+              تواصل معنا
+            </a>
+          </div>
+        </div>
 
-          {/* Pillars */}
-          <div className="mt-10 flex w-full max-w-3xl items-end justify-center gap-3 sm:gap-6">
-            {PILLAR_LABELS.map((label, i) => {
-              // Each pillar reveals its label progressively
-              const start = 0.25 + i * 0.1;
-              const local = Math.max(0, Math.min(1, (p - start) / 0.18));
-              const labelOpacity = local;
-              const heightBoost = 1 + local * 0.18;
-              return (
-                <div key={i} className="flex flex-col items-center">
+        {/* Visual: five pillars rising */}
+        <div className="relative mx-auto w-full max-w-md">
+          <div className="rounded-3xl border border-[#0D1B3E]/10 bg-white p-6 shadow-[0_30px_80px_-40px_rgba(13,27,62,0.25)]">
+            <div className="flex items-end justify-center gap-3 pt-6">
+              {PILLARS.map((p, i) => (
+                <div key={i} className="flex flex-col items-center gap-2">
                   <div
-                    className="relative w-12 origin-bottom overflow-hidden rounded-t-md bg-gradient-to-b from-primary to-[oklch(0.32_0.12_275)] transition-[height,transform] duration-500 sm:w-16"
+                    className="animate-pillar w-9 origin-bottom rounded-t-md bg-[#0D1B3E] sm:w-11"
                     style={{
-                      height: `${(128 + i * 6) * heightBoost}px`,
-                      boxShadow:
-                        "inset 0 1px 0 oklch(1 0 0 / 0.25), 0 20px 60px -20px oklch(0.55 0.22 275 / 0.6)",
+                      height: `${110 + i * 14}px`,
+                      animationDelay: `${300 + i * 110}ms`,
                     }}
-                  >
-                    {/* shimmer band that travels up as we scroll */}
-                    <span
-                      className="absolute inset-x-0 h-10 bg-gradient-to-t from-transparent via-white/30 to-transparent"
-                      style={{ bottom: `${local * 100}%`, opacity: local }}
-                    />
-                  </div>
-                  <span
-                    className="mt-3 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground sm:text-xs"
-                    style={{
-                      opacity: labelOpacity,
-                      transform: `translateY(${(1 - labelOpacity) * 8}px)`,
-                    }}
-                  >
-                    {label}
-                  </span>
+                  />
                 </div>
-              );
-            })}
+              ))}
+            </div>
+            <div className="mt-3 h-px hairline" />
+            <div className="mt-3 flex justify-center gap-3 sm:gap-5">
+              {PILLARS.map((p, i) => (
+                <span
+                  key={i}
+                  className="w-9 text-center text-[10px] font-medium text-[#0D1B3E]/70 sm:w-11"
+                >
+                  {p.t}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+              {[
+                { v: "−38%", l: "زمن التنفيذ" },
+                { v: "−24%", l: "المرتجعات" },
+                { v: "+31%", l: "رضا العملاء" },
+              ].map((k, i) => (
+                <div key={i} className="rounded-xl bg-[#F8F7F4] p-3">
+                  <div className="text-lg font-bold text-[#0D1B3E]">{k.v}</div>
+                  <div className="mt-0.5 text-[10px] text-muted-foreground">{k.l}</div>
+                </div>
+              ))}
+            </div>
           </div>
-
-          {/* Progress bar */}
-          <div className="mt-10 h-px w-48 bg-white/10">
-            <div
-              className="h-full bg-primary transition-[width]"
-              style={{ width: `${Math.round(p * 100)}%` }}
-            />
-          </div>
+          <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
         </div>
       </div>
     </section>
@@ -386,33 +372,86 @@ function Transformation() {
 }
 
 // ============================================================
-// SECTION 3 — SERVICES
+// PROBLEM
 // ============================================================
-function Services() {
+function Problem() {
   return (
-    <section id="services" className="relative py-24 lg:py-28">
+    <section id="problem" className="relative py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <div className="text-right">
+              <span className="text-xs tracking-[0.25em] text-muted-foreground">المشكلة</span>
+              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
+                المشكلة ليست دائماً
+                <br />
+                في المبيعات
+              </h2>
+              <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
+                كثير من المتاجر تملك منتجات جيدة وطلبات مستمرة، لكنها تعاني من تأخر التنفيذ، ضعف
+                المتابعة، تشتت الفريق، ارتفاع المرتجعات، أو غياب مؤشرات واضحة لاتخاذ القرار.
+              </p>
+            </div>
+          </Reveal>
+
+          <ul className="grid gap-3">
+            {PROBLEM_POINTS.map((p, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <li className="group flex items-start gap-4 rounded-2xl border border-[#0D1B3E]/8 bg-white p-4 transition hover:border-[#0D1B3E]/25 hover:-translate-y-0.5">
+                  <span className="mt-0.5 inline-grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0D1B3E]/5 text-[11px] font-semibold text-[#0D1B3E]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm leading-relaxed text-[#1F2937] sm:text-base">{p}</span>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// PILLARS
+// ============================================================
+function Pillars() {
+  return (
+    <section id="pillars" className="relative py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
-          <div className="flex flex-col items-start gap-3">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Services</span>
-            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
-              <span className="text-gradient">What we do with you.</span>
+          <div className="text-right">
+            <span className="text-xs tracking-[0.25em] text-muted-foreground">الأعمدة الخمسة</span>
+            <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">
+              نحلل المتجر من خلال خمسة أعمدة أساسية
             </h2>
+            <p className="mt-4 max-w-2xl text-base leading-loose text-muted-foreground">
+              كل عمود يُقيَّم على حدة ثم تُربط النتائج معاً لرسم صورة كاملة لواقع التشغيل.
+            </p>
           </div>
         </Reveal>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 80}>
-              <article className="glass group h-full rounded-2xl p-5 transition hover:-translate-y-1 hover:border-primary/40">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                  <span className="text-sm font-semibold">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </article>
-            </Reveal>
-          ))}
+          {PILLARS.map((p, i) => {
+            const Icon = PILLAR_ICONS[i];
+            return (
+              <Reveal key={p.t} delay={i * 90}>
+                <article className="group relative h-full overflow-hidden rounded-2xl border border-[#0D1B3E]/8 bg-white p-5 transition hover:-translate-y-1 hover:border-[#0D1B3E]/30">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0D1B3E]/5 text-[#0D1B3E]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between">
+                    <h3 className="text-base font-bold text-[#0D1B3E]">{p.t}</h3>
+                    <span className="text-[11px] text-muted-foreground">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+                  <div className="absolute inset-x-0 bottom-0 h-0.5 origin-right scale-x-0 bg-[#0D1B3E] transition-transform duration-500 group-hover:scale-x-100" />
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -420,41 +459,74 @@ function Services() {
 }
 
 // ============================================================
-// SECTION 4 — PROCESS (horizontal on desktop, vertical on mobile)
+// SERVICES
+// ============================================================
+function Services() {
+  return (
+    <section id="services" className="relative bg-white py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.2fr]">
+          <Reveal>
+            <div className="text-right">
+              <span className="text-xs tracking-[0.25em] text-muted-foreground">ما نقدمه</span>
+              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">ماذا نقدم؟</h2>
+              <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
+                خدمات تشغيلية مبنية على بيانات متجرك الفعلية، وموجّهة نحو قرارات قابلة للتنفيذ.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {SERVICES.map((s, i) => (
+              <Reveal key={s} delay={i * 70}>
+                <div className="flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
+                  <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0D1B3E] text-[#F8F7F4]">
+                    <ICheck className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-sm leading-relaxed text-[#1F2937] sm:text-base">{s}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// PROCESS — horizontal on desktop, vertical on mobile
 // ============================================================
 function Process() {
   return (
-    <section id="process" className="relative py-24 lg:py-28">
+    <section id="process" className="relative py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
-          <div className="flex flex-col items-start gap-3">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Process</span>
-            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
-              <span className="text-gradient">Four steps. One outcome.</span>
-            </h2>
+          <div className="text-right">
+            <span className="text-xs tracking-[0.25em] text-muted-foreground">طريقة العمل</span>
+            <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">كيف نعمل معك؟</h2>
           </div>
         </Reveal>
 
-        <div className="relative mt-14">
-          {/* connector line */}
+        <div className="relative mt-12">
           <div
             aria-hidden
-            className="absolute hidden lg:block lg:left-0 lg:right-0 lg:top-6 lg:h-px lg:bg-gradient-to-r lg:from-transparent lg:via-primary/40 lg:to-transparent"
+            className="absolute hidden lg:block lg:inset-x-0 lg:top-5 lg:h-px lg:bg-gradient-to-l lg:from-transparent lg:via-[#0D1B3E]/30 lg:to-transparent"
           />
           <div
             aria-hidden
-            className="absolute left-[15px] top-0 h-full w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent lg:hidden"
+            className="absolute right-[15px] top-0 h-full w-px bg-gradient-to-b from-transparent via-[#0D1B3E]/30 to-transparent lg:hidden"
           />
 
-          <ol className="grid gap-8 lg:grid-cols-4 lg:gap-6">
+          <ol className="grid gap-8 lg:grid-cols-5 lg:gap-4">
             {STEPS.map((s, i) => (
               <Reveal key={s.n} delay={i * 100}>
                 <li className="relative flex gap-4 lg:flex-col lg:gap-4">
-                  <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background text-xs font-semibold text-primary">
+                  <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#0D1B3E]/40 bg-[#F8F7F4] text-xs font-bold text-[#0D1B3E]">
                     {s.n}
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-base font-semibold">{s.t}</h3>
+                    <h3 className="text-base font-bold text-[#0D1B3E]">{s.t}</h3>
                     <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
                   </div>
                 </li>
@@ -468,145 +540,101 @@ function Process() {
 }
 
 // ============================================================
-// SECTION 5 — RESULTS (animated metrics)
+// WHY
 // ============================================================
-function Results() {
+function Why() {
   return (
-    <section id="results" className="relative py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+    <section id="why" className="relative py-20 lg:py-24">
+      <div className="mx-auto max-w-5xl px-5 lg:px-8">
         <Reveal>
-          <div className="flex flex-col items-start gap-3">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Results</span>
-            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
-              <span className="text-gradient">Outcomes you can measure.</span>
+          <div className="relative overflow-hidden rounded-3xl border border-[#0D1B3E]/15 bg-[#0D1B3E] p-8 text-right text-[#F8F7F4] sm:p-12">
+            <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
+              <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
+            </div>
+            <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
+            <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
+              لأننا ننظر للمتجر من زاوية التشغيل الكامل
             </h2>
+            <p className="relative mt-5 max-w-2xl text-base leading-loose text-[#F8F7F4]/85 sm:text-lg">
+              لأننا لا ننظر للمتجر من زاوية التسويق فقط، بل من زاوية التشغيل الكامل: كيف تُدار
+              الطلبات، كيف يتحرك الفريق، أين تتكرر الأخطاء، وما القرارات التي تحتاجها الإدارة لتحسين
+              الأداء.
+            </p>
+
+            <div className="relative mt-8 grid gap-3 sm:grid-cols-3">
+              {[
+                "نظرة تشغيلية لا تسويقية",
+                "قرارات مبنية على بيانات",
+                "خطط قابلة للتنفيذ والمتابعة",
+              ].map((t, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 rounded-xl border border-[#F8F7F4]/15 bg-white/5 px-4 py-3 text-sm text-[#F8F7F4]"
+                >
+                  <ICheck className="h-4 w-4 shrink-0 text-[#F8F7F4]/90" />
+                  {t}
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map((m, i) => (
-            <Reveal key={m.l} delay={i * 100}>
-              <Metric prefix={m.prefix} value={m.v} suffix={m.suffix} label={m.l} />
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
 
-function Metric({
-  value,
-  suffix,
-  prefix,
-  label,
-}: {
-  value: number;
-  suffix: string;
-  prefix: string;
-  label: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [n, setN] = useState(0);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            const start = performance.now();
-            const dur = 1400;
-            const tick = (t: number) => {
-              const k = Math.min(1, (t - start) / dur);
-              const eased = 1 - Math.pow(1 - k, 3);
-              setN(Math.round(eased * value));
-              if (k < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { threshold: 0.4 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [value]);
-
-  return (
-    <div ref={ref} className="glass rounded-2xl p-6">
-      <div className="flex items-baseline gap-1">
-        <span className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          {prefix}
-          {n}
-        </span>
-        <span className="text-xl font-medium text-primary">{suffix}</span>
-      </div>
-      <div className="mt-3 text-sm text-muted-foreground">{label}</div>
-      <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/5">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-primary to-[oklch(0.75_0.14_275)] transition-[width] duration-1000"
-          style={{ width: `${Math.min(100, (n / value) * 100)}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
 // ============================================================
-// SECTION 6 — CONTACT
+// CONTACT
 // ============================================================
 function Contact() {
   const [sent, setSent] = useState(false);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") || "");
-    const store = String(data.get("store") || "");
-    const email = String(data.get("email") || "");
-    const msg = String(data.get("msg") || "");
+    const f = new FormData(e.currentTarget);
     const text = [
-      `Hello ${BRAND},`,
-      `Name: ${name}`,
-      `Store: ${store}`,
-      `Email: ${email}`,
+      `السلام عليكم ${BRAND_AR}،`,
+      `الاسم: ${f.get("name") || ""}`,
+      `اسم المتجر: ${f.get("store") || ""}`,
+      `المنصة: ${f.get("platform") || ""}`,
+      `رابط المتجر: ${f.get("url") || ""}`,
+      `رقم التواصل: ${f.get("phone") || ""}`,
       "",
-      msg,
+      String(f.get("msg") || ""),
     ].join("\n");
     window.open(waLink(text), "_blank");
     setSent(true);
   };
 
   return (
-    <section id="contact" className="relative py-24 lg:py-28">
+    <section id="contact" className="relative py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
-            <div>
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Contact</span>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
-                <span className="text-gradient">Let's pressure-test your operations.</span>
+            <div className="text-right">
+              <span className="text-xs tracking-[0.25em] text-muted-foreground">تواصل</span>
+              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
+                ابدأ من فهم وضع متجرك الحالي
               </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Book a 30-minute call. We'll review where you are, where the leverage is, and
-                whether {BRAND} is the right partner.
+              <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
+                شاركنا بيانات متجرك الأساسية، وسنساعدك على تحديد أين تقف اليوم وما الذي يحتاج إلى
+                تحسين أولاً.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={waLink(`Hello ${BRAND}, I'd like to book a meeting.`)}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium backdrop-blur transition hover:bg-white/10"
+                  href={waLink(`السلام عليكم ${BRAND_AR}، أرغب بالتواصل.`)}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0D1B3E]/20 bg-white px-5 py-3 text-sm font-medium text-[#0D1B3E] transition hover:bg-[#0D1B3E]/5"
                 >
-                  WhatsApp us
+                  <IWa className="h-4 w-4" />
+                  تواصل عبر واتساب
                 </a>
                 <a
                   href="#book"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-[0_0_25px_-4px_oklch(0.62_0.21_274_/_0.7)] transition hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0D1B3E] px-5 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5"
                 >
-                  Book a Meeting
+                  احجز اجتماعاً
+                  <IArrow className="h-4 w-4 rotate-180" />
                 </a>
               </div>
             </div>
@@ -616,38 +644,39 @@ function Contact() {
             <form
               id="book"
               onSubmit={onSubmit}
-              className="glass rounded-2xl p-5 sm:p-7"
               noValidate
+              className="rounded-2xl border border-[#0D1B3E]/10 bg-white p-5 shadow-[0_20px_60px_-40px_rgba(13,27,62,0.3)] sm:p-7"
             >
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field name="name" label={FORM_LABELS.name} required />
-                <Field name="store" label={FORM_LABELS.store} />
+                <Field name="name" label="الاسم الكامل" required />
+                <Field name="store" label="اسم المتجر" required />
+                <Field name="platform" label="المنصة (سلة، زد، شوبيفاي…)" />
+                <Field name="phone" label="رقم التواصل" type="tel" />
                 <div className="sm:col-span-2">
-                  <Field name="email" type="email" label={FORM_LABELS.email} required />
+                  <Field name="url" label="رابط المتجر" type="url" />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                      {FORM_LABELS.msg}
+                  <label className="block text-right">
+                    <span className="mb-1.5 block text-xs text-[#0D1B3E]/70">
+                      أخبرنا باختصار عن التحدي الحالي
                     </span>
                     <textarea
                       name="msg"
                       rows={4}
-                      className="w-full resize-none rounded-xl border border-white/10 bg-background/60 px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/30"
+                      className="w-full resize-none rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-3 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E] focus:ring-2 focus:ring-[#0D1B3E]/15"
                     />
                   </label>
                 </div>
               </div>
               <button
                 type="submit"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-[0_0_25px_-4px_oklch(0.62_0.21_274_/_0.7)] transition hover:-translate-y-0.5 sm:w-auto"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0D1B3E] px-5 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5 sm:w-auto"
               >
-                {FORM_LABELS.submit}
+                إرسال عبر واتساب
+                <IArrow className="h-4 w-4 rotate-180" />
               </button>
               {sent && (
-                <p className="mt-3 text-xs text-muted-foreground">
-                  Opening WhatsApp with your message…
-                </p>
+                <p className="mt-3 text-xs text-muted-foreground">يتم فتح واتساب برسالتك…</p>
               )}
             </form>
           </Reveal>
@@ -669,16 +698,16 @@ function Field({
   required?: boolean;
 }) {
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
+    <label className="block text-right">
+      <span className="mb-1.5 block text-xs text-[#0D1B3E]/70">
         {label}
-        {required && <span className="ml-1 text-primary">*</span>}
+        {required && <span className="mx-1 text-[#0D1B3E]">*</span>}
       </span>
       <input
         name={name}
         type={type}
         required={required}
-        className="w-full rounded-xl border border-white/10 bg-background/60 px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/30"
+        className="w-full rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-3 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E] focus:ring-2 focus:ring-[#0D1B3E]/15"
       />
     </label>
   );
@@ -689,15 +718,13 @@ function Field({
 // ============================================================
 function Footer() {
   return (
-    <footer className="border-t border-white/10 py-10">
+    <footer className="border-t border-[#0D1B3E]/10 py-10">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 text-sm text-muted-foreground sm:flex sm:justify-between lg:px-8">
         <div className="flex min-w-0 items-center gap-2.5">
-          <span className="inline-grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground text-xs font-bold">
-            A
-          </span>
-          <span className="truncate tracking-[0.18em] text-foreground">{BRAND}</span>
+          <Logo className="h-6 w-6 shrink-0 text-[#0D1B3E]" />
+          <span className="truncate font-bold text-[#0D1B3E]">{BRAND_AR}</span>
         </div>
-        <div className="text-xs">© {new Date().getFullYear()} {BRAND}. All rights reserved.</div>
+        <div className="text-xs">© {new Date().getFullYear()} {BRAND_AR}. جميع الحقوق محفوظة.</div>
       </div>
     </footer>
   );
@@ -710,14 +737,12 @@ function FloatingWhatsApp() {
   return (
     <a
       aria-label="WhatsApp"
-      href={waLink(`Hello ${BRAND}, I'd like to talk.`)}
+      href={waLink(`السلام عليكم ${BRAND_AR}، أرغب بالتواصل.`)}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-5 right-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_10px_40px_-10px_oklch(0.62_0.21_274_/_0.9)] transition hover:-translate-y-0.5 sm:h-14 sm:w-14"
+      className="fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5 sm:h-14 sm:w-14"
     >
-      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-        <path d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.36-1.62-1.52-1.89-.16-.27-.02-.41.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.47-.62-.48l-.53-.01c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3 0 1.36.98 2.67 1.12 2.85.14.18 1.94 2.96 4.7 4.15.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32zM12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-1.8a8.2 8.2 0 1 0 0-16.4 8.2 8.2 0 0 0 0 16.4z" />
-      </svg>
+      <IWa className="h-6 w-6" />
     </a>
   );
 }
