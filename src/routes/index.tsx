@@ -349,7 +349,7 @@ function Header() {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3.5 sm:flex sm:justify-between lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2.5">
           <Logo className="h-7 w-7 shrink-0 text-[#0D1B3E]" />
-          <span className="truncate text-base font-bold tracking-wide text-[#0D1B3E]">{BRAND_AR}</span>
+          <span className="truncate text-base font-bold text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
