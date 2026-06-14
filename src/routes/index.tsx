@@ -2,11 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode, type SVGProps } from "react";
 
 import collageHero from "@/assets/collage-hero.png.asset.json";
-import imgAnalysis from "@/assets/analysis.png.asset.json";
-import imgMonitoring from "@/assets/monitoring.png.asset.json";
-import imgDevices from "@/assets/devices.png.asset.json";
-import imgHandshake from "@/assets/handshake.png.asset.json";
-import imgPointer from "@/assets/pointer.png.asset.json";
+import collageNews from "@/assets/collage-news.png.asset.json";
+import collageReader from "@/assets/collage-reader.png.asset.json";
+import collageHandshake from "@/assets/collage-handshake.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,16 +43,12 @@ const SERVICES = [
   "تقارير إدارية تساعد على اتخاذ القرار",
 ];
 
-const SERVICE_VISUALS: { src: string; t: string }[] = [
-  { src: imgAnalysis.url, t: "تحليل البيانات" },
-  { src: imgMonitoring.url, t: "متابعة الأداء" },
-  { src: imgDevices.url, t: "تنظيم القنوات" },
+const SERVICE_VISUALS: { src: string; t: string; rotate: string }[] = [
+  { src: collageNews.url, t: "قراءة دقيقة لواقع متجرك", rotate: "-rotate-1" },
+  { src: collageReader.url, t: "فهم ما خلف الأرقام", rotate: "rotate-1" },
 ];
 
-const WHY_VISUALS: { src: string; t: string }[] = [
-  { src: imgHandshake.url, t: "شراكة تنفيذية" },
-  { src: imgPointer.url, t: "توجيه دقيق" },
-];
+const WHY_VISUAL = { src: collageHandshake.url, t: "شراكة تنفيذية حقيقية" };
 
 const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
