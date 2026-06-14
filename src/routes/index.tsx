@@ -339,27 +339,31 @@ function Hero() {
           </div>
         </div>
 
-        {/* Hero collage visual */}
+        {/* Hero collage — interactive floating composition */}
         <div className="relative mx-auto w-full max-w-md">
-          <div
-            className="group relative overflow-hidden rounded-3xl border border-[#0D1B3E]/10 bg-[#0D1B3E] shadow-[0_30px_80px_-40px_rgba(13,27,62,0.45)] transition-all duration-700 hover:-translate-y-1"
-            style={{ animationDelay: "400ms" }}
-          >
-            <div className="aspect-[4/5] w-full overflow-hidden">
-              <img
-                src={collageHero.url}
-                alt="لوحة تشغيلية لمتجر إلكتروني"
-                className="h-full w-full object-cover object-center opacity-95 transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-            </div>
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-[#0D1B3E] backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
-                صورة تشغيلية شاملة
+          <div className="group relative">
+            <span aria-hidden className="absolute -top-4 right-6 h-20 w-20 rounded-full bg-[#0D1B3E]/10 blur-2xl transition-all duration-700 group-hover:scale-125" />
+            <span aria-hidden className="absolute -bottom-6 -left-4 h-28 w-28 rounded-full bg-[#0D1B3E]/15 blur-2xl transition-all duration-700 group-hover:-translate-x-2" />
+            <span aria-hidden className="absolute right-2 top-10 h-3 w-3 rounded-full bg-[#0D1B3E] opacity-70 transition-transform duration-700 group-hover:translate-y-2" />
+            <span aria-hidden className="absolute -left-1 top-1/3 h-2 w-2 rounded-full bg-[#0D1B3E]/50 transition-transform duration-700 group-hover:-translate-y-2" />
+
+            <div className="relative overflow-hidden rounded-[2rem] border border-[#0D1B3E]/10 bg-gradient-to-br from-white to-[#F8F7F4] p-2 shadow-[0_40px_90px_-40px_rgba(13,27,62,0.5)] transition-all duration-700 hover:-translate-y-1.5 hover:shadow-[0_50px_110px_-40px_rgba(13,27,62,0.6)]">
+              <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[1.5rem]">
+                <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgba(13,27,62,0.06),transparent_75%)]" />
+                <img
+                  src={collageHero.url}
+                  alt="شراكة بين أعمدة والمتجر الإلكتروني"
+                  className="absolute inset-0 h-full w-full object-contain p-3 drop-shadow-[0_25px_30px_rgba(13,27,62,0.25)] transition-transform duration-700 group-hover:scale-[1.04] group-hover:-rotate-1"
+                />
+              </div>
+              <div className="pointer-events-none absolute bottom-4 right-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#0D1B3E]/10 bg-white/95 px-3 py-1.5 text-[11px] font-bold text-[#0D1B3E] shadow-sm backdrop-blur">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
+                  شراكة تشغيلية حقيقية
+                </div>
               </div>
             </div>
           </div>
-          <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
         </div>
       </div>
     </section>
