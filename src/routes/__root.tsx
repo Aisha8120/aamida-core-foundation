@@ -80,10 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "أعمدة | Aamida — Ecommerce Operations Agency" },
       { name: "description", content: "نحوّل بيانات متجرك إلى خطة تشغيل واضحة للنمو. Aamida — operational partner for ecommerce stores." },
       { name: "author", content: "Aamida" },
-      { property: "og:title", content: "أعمدة | Aamida" },
-      { property: "og:description", content: "Building the operational foundation for sustainable ecommerce growth." },
+      { property: "og:title", content: "أعمدة | Aamida — Ecommerce Operations Agency" },
+      { property: "og:description", content: "نحوّل بيانات متجرك إلى خطة تشغيل واضحة للنمو. Aamida — operational partner for ecommerce stores." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "أعمدة | Aamida — Ecommerce Operations Agency" },
+      { name: "twitter:description", content: "نحوّل بيانات متجرك إلى خطة تشغيل واضحة للنمو. Aamida — operational partner for ecommerce stores." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c50d1286-54c9-46d3-b7be-d28f117e70b3/id-preview-2d763f3a--bc2b2736-fe36-45b8-9f93-8020862cbee1.lovable.app-1781475557509.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c50d1286-54c9-46d3-b7be-d28f117e70b3/id-preview-2d763f3a--bc2b2736-fe36-45b8-9f93-8020862cbee1.lovable.app-1781475557509.png" },
     ],
     links: [
       {
