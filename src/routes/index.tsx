@@ -521,10 +521,8 @@ function Problems() {
 // PILLARS
 // ============================================================
 function Pillars() {
-  const STRENGTH = [78, 62, 88, 55, 72];
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
-  const [labelsIn, setLabelsIn] = useState(false);
   const [active, setActive] = useState<number | null>(null);
 
   useEffect(() => {
@@ -535,9 +533,7 @@ function Pillars() {
         for (const e of entries) {
           if (e.isIntersecting) {
             setStarted(true);
-            const tm = window.setTimeout(() => setLabelsIn(true), 5 * 120 + 650);
             io.unobserve(e.target);
-            return () => window.clearTimeout(tm);
           }
         }
       },
@@ -546,8 +542,6 @@ function Pillars() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
-  const max = Math.max(...STRENGTH);
 
   return (
     <section id="pillars" ref={sectionRef} className="relative py-20 lg:py-24">
