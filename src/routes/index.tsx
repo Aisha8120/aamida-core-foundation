@@ -564,6 +564,7 @@ function LandingPage() {
     <div dir={t.dir} className="relative min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
       <Header lang={lang} setLang={setLang} t={t} />
       <main className="relative">
+        <PinnedStory t={t} />
         <Hero t={t} />
         <Problem t={t} />
         <Diagnosis t={t} />
