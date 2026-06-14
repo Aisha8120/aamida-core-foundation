@@ -476,7 +476,7 @@ function Problems() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
               <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
             </div>
-            <span className="relative text-xs tracking-[0.25em] text-[#F8F7F4]/60">تشخيص</span>
+            <span className="relative text-xs text-[#F8F7F4]/60">تشخيص</span>
             <h2 className="relative mt-3 text-2xl font-bold leading-snug sm:text-3xl lg:text-4xl">
               ما الذي يجعل المتاجر تتعثر؟
             </h2>
@@ -548,7 +548,7 @@ function Pillars() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">الأعمدة الخمسة</span>
+            <span className="text-xs text-muted-foreground">الأعمدة الخمسة</span>
             <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">
               أعمدة النمو الخمسة
             </h2>
@@ -710,7 +710,7 @@ function Journey() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">رحلة التغيير</span>
+            <span className="text-xs text-muted-foreground">رحلة التغيير</span>
             <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
               رحلة الثلاثة أشهر
             </h2>
@@ -728,7 +728,7 @@ function Journey() {
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0D1B3E] text-[10px] font-bold text-[#F8F7F4]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{j.month}</span>
+                  <span className="text-xs text-muted-foreground">{j.month}</span>
                 </div>
                 <h3 className="mt-4 text-xl font-bold text-[#0D1B3E]">{j.title}</h3>
                 <ul className="mt-4 space-y-2.5">
@@ -763,7 +763,7 @@ function SystemService() {
         <div className="grid items-stretch gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
             <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">خدمة مميزة</span>
+              <span className="text-xs text-muted-foreground">خدمة مميزة</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
                 خدمة بناء النظام التشغيلي
               </h2>
@@ -857,7 +857,7 @@ function Why() {
               <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
                 <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
               </div>
-              <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
+              <span className="relative text-xs text-[#F8F7F4]/70">لماذا أعمدة</span>
               <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
                 لماذا أعمدة؟
               </h2>
@@ -912,7 +912,7 @@ function Contact() {
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
             <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">تواصل</span>
+              <span className="text-xs text-muted-foreground">تواصل</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
                 ابدأ رحلة التغيير
               </h2>
