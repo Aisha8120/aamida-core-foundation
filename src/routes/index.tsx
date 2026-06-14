@@ -50,6 +50,16 @@ const T = {
       ],
       pillarsMini: ["الطلبات", "العملاء", "العمليات", "المرتجعات", "التسويق"],
     },
+    pinned: {
+      phrases: [
+        "نبني أساس التشغيل",
+        "لنموٍ مستدام",
+        "من الفوضى إلى منظومة",
+        "ومن التشغيل إلى نمو قابل للقياس",
+      ],
+      ctaBook: "احجز استشارتك",
+      ctaWa: "تواصل عبر واتساب",
+    },
     problem: {
       title: "عندما تنمو المبيعات دون نظام واضح، تبدأ الفجوات التشغيلية بالظهور",
       items: [
@@ -263,6 +273,16 @@ const T = {
         { l: "Operational efficiency", v: "+46%" },
       ],
       pillarsMini: ["Orders", "Customers", "Operations", "Returns", "Marketing"],
+    },
+    pinned: {
+      phrases: [
+        "We build the operating foundation",
+        "For sustainable growth",
+        "From chaos to a system",
+        "From operations to measurable growth",
+      ],
+      ctaBook: "Book Your Consultation",
+      ctaWa: "Contact on WhatsApp",
     },
     problem: {
       title: "When sales grow without a clear system, operational gaps begin to appear",
@@ -544,6 +564,7 @@ function LandingPage() {
     <div dir={t.dir} className="relative min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
       <Header lang={lang} setLang={setLang} t={t} />
       <main className="relative">
+        <PinnedStory t={t} />
         <Hero t={t} />
         <Problem t={t} />
         <Diagnosis t={t} />
@@ -747,6 +768,159 @@ function Hero({ t }: { t: TT }) {
     </section>
   );
 }
+
+// ============================================================
+// PINNED SCROLL STORY
+// ============================================================
+function PinnedStory({ t }: { t: TT }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0); // 0..1 over the pinned scroll
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = wrapRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const total = el.offsetHeight - vh;
+        // distance scrolled past the top of the section
+        const scrolled = Math.min(Math.max(-rect.top, 0), total);
+        setProgress(total > 0 ? scrolled / total : 0);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const phrases = t.pinned.phrases;
+  // We have N phrases + 1 CTA state => N+1 stops, equally spaced.
+  const stops = phrases.length + 1; // e.g. 5
+  // For each phrase i, its center is at i/(stops-1)
+  const stepSize = 1 / (stops - 1);
+
+  const stateOpacity = (i: number) => {
+    const center = i * stepSize;
+    const dist = Math.abs(progress - center);
+    // visible within half a step, smooth fade
+    const o = 1 - Math.min(dist / (stepSize * 0.85), 1);
+    // ease
+    return o * o * (3 - 2 * o);
+  };
+
+  const stateTransform = (i: number) => {
+    const center = i * stepSize;
+    const delta = progress - center; // negative => coming, positive => leaving
+    // Slide up as we leave, slide up from below as we enter
+    const y = delta * 120; // px
+    const scale = 1 + Math.max(0, -delta) * 0.18 - Math.max(0, delta) * 0.25;
+    return `translate3d(0, ${-y}px, 0) scale(${scale.toFixed(3)})`;
+  };
+
+  const ctaIndex = phrases.length;
+  const ctaOpacity = stateOpacity(ctaIndex);
+  const glowScale = 1 + progress * 0.5;
+  const glowOpacity = 0.35 + progress * 0.35;
+
+  return (
+    <section
+      ref={wrapRef}
+      aria-label="Aamida intro"
+      className="relative"
+      style={{ height: "420vh" }}
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* background layers */}
+        <div className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-[transform,opacity] duration-300"
+          style={{
+            background:
+              "radial-gradient(closest-side, oklch(0.55 0.22 28 / 0.55), transparent 70%)",
+            transform: `translate(-50%, -50%) scale(${glowScale.toFixed(3)})`,
+            opacity: glowOpacity,
+          }}
+        />
+        <Particles />
+
+        {/* progress hairline */}
+        <div className="absolute left-0 right-0 top-0 h-px bg-white/5">
+          <div
+            className="h-full bg-gradient-to-r from-transparent via-[oklch(0.7_0.18_28)] to-transparent"
+            style={{ width: `${Math.round(progress * 100)}%` }}
+          />
+        </div>
+
+        {/* phrases stage */}
+        <div className="relative z-10 flex h-full items-center justify-center px-6">
+          <div className="relative h-[40vh] w-full max-w-5xl">
+            {phrases.map((p, i) => (
+              <h2
+                key={i}
+                className="absolute inset-0 flex items-center justify-center text-center text-4xl font-bold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl will-change-transform"
+                style={{
+                  opacity: stateOpacity(i),
+                  transform: stateTransform(i),
+                }}
+              >
+                <span className="text-gradient drop-shadow-[0_8px_40px_oklch(0.55_0.2_28_/_0.55)]">
+                  {p}
+                </span>
+              </h2>
+            ))}
+
+            {/* CTA state */}
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center gap-5 will-change-transform"
+              style={{
+                opacity: ctaOpacity,
+                transform: stateTransform(ctaIndex),
+                pointerEvents: ctaOpacity > 0.5 ? "auto" : "none",
+              }}
+            >
+              <p className="text-center text-lg text-muted-foreground sm:text-xl">
+                {t.pinned.phrases[phrases.length - 1]}
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href="#contact"
+                  className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_28)] px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_0_40px_-4px_oklch(0.65_0.18_28_/_0.8)] transition-all hover:-translate-y-0.5"
+                >
+                  {t.pinned.ctaBook}
+                </a>
+                <a
+                  href={waLink(t.form.waIntro)}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-medium text-foreground backdrop-blur-md transition-all hover:bg-white/10 hover:-translate-y-0.5"
+                >
+                  {t.pinned.ctaWa}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* scroll hint */}
+        <div
+          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-muted-foreground transition-opacity"
+          style={{ opacity: Math.max(0, 1 - progress * 4) }}
+        >
+          scroll
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 
 function Particles() {
   const dots = useMemo(
