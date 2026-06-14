@@ -9,11 +9,11 @@ import collageBridge from "@/assets/collage-bridge.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "أعمدة | نبني الأساس الذي ينمو عليه متجرك" },
+      { title: "أعمدة | رحلة تغيير حقيقية لمتجرك خلال 90 يوماً" },
       {
         name: "description",
         content:
-          "أعمدة تساعد المتاجر الإلكترونية على فهم واقعها التشغيلي وبناء خطة تنفيذ واضحة تقلل الفوضى وتدعم النمو.",
+          "أعمدة ترافق متجرك خلال رحلة 90 يوماً لفهم واقعك التشغيلي، تشخيص التحديات، وبناء نظام عمل واضح يساعدك على النمو.",
       },
     ],
   }),
@@ -26,21 +26,108 @@ export const Route = createFileRoute("/")({
 const WHATSAPP_NUMBER = "966500000000";
 const BRAND_AR = "أعمدة";
 
-const PILLARS: { t: string; d: string }[] = [
-  { t: "الطلبات", d: "نحلل رحلة الطلب من لحظة الشراء حتى التسليم لضمان كفاءة التنفيذ وتقليل الأخطاء." },
-  { t: "التسويق", d: "نراجع القنوات التسويقية والأداء الفعلي للوصول إلى قرارات مبنية على البيانات." },
-  { t: "العمليات", d: "نقيم سير العمل الداخلي ونقاط التعطل والتحديات التشغيلية اليومية." },
-  { t: "المرتجعات", d: "نحدد أسباب المرتجعات وتأثيرها على الربحية وتجربة العميل." },
-  { t: "العملاء", d: "نقيس جودة الخدمة وتجربة العميل ومستوى الرضا والاحتفاظ بالعملاء." },
+const PILLARS: { t: string; lines: string[] }[] = [
+  {
+    t: "الطلبات",
+    lines: [
+      "هل يتم تنفيذ الطلبات بكفاءة؟",
+      "أين تتكرر الأخطاء؟",
+      "ما الذي يسبب التأخير؟",
+    ],
+  },
+  {
+    t: "التسويق",
+    lines: [
+      "هل يتم صرف الميزانية في المكان الصحيح؟",
+      "ما القنوات الأكثر تأثيراً؟",
+      "ما فرص النمو المتاحة؟",
+    ],
+  },
+  {
+    t: "العمليات",
+    lines: [
+      "كيف يتحرك العمل داخل المتجر؟",
+      "هل يوجد اختناقات أو مهام غير واضحة؟",
+      "هل الفريق يعمل وفق نظام أم اجتهادات فردية؟",
+    ],
+  },
+  {
+    t: "المرتجعات",
+    lines: [
+      "ما الأسباب الحقيقية للمرتجعات؟",
+      "ما أثرها على الأرباح؟",
+      "كيف يمكن تقليلها؟",
+    ],
+  },
+  {
+    t: "العملاء",
+    lines: [
+      "كيف تبدو تجربة العميل؟",
+      "ما مستوى الرضا؟",
+      "هل توجد فرص لتحسين الولاء والاحتفاظ بالعملاء؟",
+    ],
+  },
 ];
 
-const SERVICES = [
+const JOURNEY = [
+  {
+    month: "الشهر الأول",
+    title: "التشخيص والتأسيس",
+    items: [
+      "دراسة المتجر بالكامل",
+      "تحليل الوضع الحالي",
+      "مراجعة العمليات",
+      "تحديد التحديات الرئيسية",
+      "بناء خارطة الأولويات",
+    ],
+    close: "في نهاية الشهر الأول يصبح لدينا تصور واضح للوضع الحالي وخطة عمل واضحة للمرحلة القادمة.",
+  },
+  {
+    month: "الشهر الثاني",
+    title: "التطبيق والتحسين",
+    items: [
+      "البدء بتنفيذ التحسينات",
+      "تنظيم الإجراءات التشغيلية",
+      "بناء آليات المتابعة",
+      "تطوير مؤشرات الأداء",
+      "معالجة الاختناقات التشغيلية",
+    ],
+    close: "",
+  },
+  {
+    month: "الشهر الثالث",
+    title: "التثبيت والمتابعة",
+    items: [
+      "متابعة التنفيذ",
+      "قياس النتائج",
+      "تحسين الإجراءات",
+      "رفع كفاءة التشغيل",
+      "التأكد من استقرار النظام",
+    ],
+    close: "الهدف هو أن ينتهي المشروع والمتجر يعمل بطريقة أكثر وضوحاً وتنظيماً من اليوم الأول.",
+  },
+];
+
+const SYSTEM_FEATURES = [
+  "تنظيم المهام والمسؤوليات",
+  "متابعة سير العمل",
+  "إدارة العمليات اليومية",
+  "لوحات مؤشرات الأداء",
+  "متابعة الفريق",
+  "النماذج والإجراءات التشغيلية",
+  "التقارير الإدارية",
+];
+
+const OUTCOMES = [
   "تحليل تشغيلي شامل",
-  "دراسة نقاط القوة والضعف",
-  "بناء خطة تطوير واضحة",
-  "تنظيم مؤشرات الأداء",
-  "متابعة التنفيذ والتحسين",
-  "تقارير إدارية تساعد على اتخاذ القرار",
+  "تقرير تنفيذي واضح",
+  "خطة تطوير عملية",
+  "متابعة لمدة ثلاثة أشهر",
+  "مؤشرات أداء واضحة",
+  "نظام تشغيلي خاص بمتجرك",
+  "إجراءات تشغيل منظمة",
+  "رؤية أوضح لاتخاذ القرار",
+  "أساس يساعد على النمو المستدام",
 ];
 
 const SERVICE_VISUALS: { src: string; t: string; rotate: string }[] = [
@@ -228,8 +315,11 @@ function LandingPage() {
       <Header />
       <main className="relative">
         <Hero />
+        <Problems />
         <Pillars />
-        <Services />
+        <Journey />
+        <SystemService />
+        <Outcomes />
         <Why />
         <Contact />
       </main>
@@ -263,7 +353,8 @@ function Header() {
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
-          <a href="#services" className="hover:text-[#0D1B3E] transition">ما نقدمه</a>
+          <a href="#journey" className="hover:text-[#0D1B3E] transition">رحلة التغيير</a>
+          <a href="#system" className="hover:text-[#0D1B3E] transition">النظام التشغيلي</a>
           <a href="#why" className="hover:text-[#0D1B3E] transition">لماذا أعمدة</a>
           <a href="#contact" className="hover:text-[#0D1B3E] transition">تواصل</a>
         </nav>
@@ -308,16 +399,19 @@ function Hero() {
             className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
             style={{ animationDelay: "100ms" }}
           >
-            نبني الأساس الذي
+            رحلة تغيير حقيقية
             <br />
-            ينمو عليه متجرك
+            لمتجرك خلال 90 يوماً
           </h1>
           <p
             className="animate-fade-up mt-6 max-w-xl text-base leading-loose text-muted-foreground sm:text-lg"
             style={{ animationDelay: "220ms" }}
           >
-            في {BRAND_AR} نساعد المتاجر الإلكترونية على فهم واقعها التشغيلي، كشف فرص التحسين، وتنظيم
-            العمل اليومي من خلال تحليل شامل وخطة تنفيذ واضحة تركز على ما يصنع الفرق الحقيقي في النمو.
+            ليست استشارة تُسلّم في ملف PDF ثم تنتهي.
+            <br />
+            في {BRAND_AR} نرافق متجرك خلال رحلة تمتد لثلاثة أشهر نبدأ فيها بفهم الواقع الحالي، وتشخيص
+            التحديات التشغيلية، ثم بناء نظام عمل واضح يساعد الفريق على العمل بكفاءة أكبر واتخاذ قرارات
+            أفضل.
           </p>
           <div
             className="animate-fade-up mt-8 flex flex-wrap gap-3"
@@ -327,14 +421,14 @@ function Hero() {
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-[#0D1B3E] px-6 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5"
             >
-              ابدأ تحليل متجرك
+              ابدأ رحلة التغيير
               <IArrow className="h-4 w-4 rotate-180" />
             </a>
             <a
               href={waLink(`السلام عليكم، أرغب بتحليل متجري عبر ${BRAND_AR}.`)}
               className="inline-flex items-center gap-2 rounded-full border border-[#0D1B3E]/20 bg-white px-6 py-3 text-sm font-medium text-[#0D1B3E] transition hover:bg-[#0D1B3E]/5 hover:-translate-y-0.5"
             >
-              تواصل معنا
+              احجز اجتماعاً
             </a>
           </div>
         </div>
@@ -365,6 +459,59 @@ function Hero() {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// PROBLEMS
+// ============================================================
+function Problems() {
+  return (
+    <section className="relative py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl bg-[#0D1B3E] p-8 text-right text-[#F8F7F4] sm:p-12 lg:p-14">
+            <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
+              <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
+            </div>
+            <span className="relative text-xs tracking-[0.25em] text-[#F8F7F4]/60">تشخيص</span>
+            <h2 className="relative mt-3 text-2xl font-bold leading-snug sm:text-3xl lg:text-4xl">
+              ما الذي يجعل المتاجر تتعثر؟
+            </h2>
+            <div className="relative mt-6 max-w-3xl space-y-3 text-base leading-loose text-[#F8F7F4]/85 sm:text-lg">
+              <p>
+                كثير من المتاجر لا تعاني من نقص المبيعات بقدر ما تعاني من <strong className="text-[#F8F7F4]">الفوضى التشغيلية</strong>.
+              </p>
+              <ul className="mt-3 space-y-2 text-[#F8F7F4]/80">
+                <li className="flex items-start gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F8F7F4]/60" />
+                  طلبات تتأخر.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F8F7F4]/60" />
+                  مهام تتعطل.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F8F7F4]/60" />
+                  قرارات تتخذ دون بيانات.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F8F7F4]/60" />
+                  فرق تعمل دون وضوح.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F8F7F4]/60" />
+                  وأخطاء تتكرر يومياً دون معرفة أسبابها الحقيقية.
+                </li>
+              </ul>
+              <p className="mt-4 text-[#F8F7F4]/70">
+                ومع مرور الوقت يبدأ النمو بالتباطؤ رغم استمرار الجهد.
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -409,11 +556,10 @@ function Pillars() {
           <div className="text-right">
             <span className="text-xs tracking-[0.25em] text-muted-foreground">الأعمدة الخمسة</span>
             <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">
-              كل متجر ناجح يرتكز على خمسة أعمدة
+              أعمدة النمو الخمسة
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-loose text-muted-foreground">
-              نقوم بدراسة متجرك من خلال خمسة محاور مترابطة تساعدنا على اكتشاف نقاط القوة والضعف
-              وتحديد الأولويات التي تستحق التركيز.
+              نقوم بدراسة المتجر من خلال خمسة أعمدة رئيسية تمثل أساس أي عملية تشغيل ناجحة.
             </p>
           </div>
         </Reveal>
@@ -445,7 +591,7 @@ function Pillars() {
                     key={p.t}
                     className="group relative flex h-full flex-1 flex-col items-center justify-end"
                   >
-                    <div className="pointer-events-none absolute bottom-full z-10 mb-3 hidden w-60 -translate-y-0 rounded-xl border border-[#0D1B3E]/10 bg-white p-3 text-right opacity-0 shadow-[0_20px_50px_-25px_rgba(13,27,62,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100 lg:block">
+                    <div className="pointer-events-none absolute bottom-full z-10 mb-3 hidden w-64 -translate-y-0 rounded-xl border border-[#0D1B3E]/10 bg-white p-3 text-right opacity-0 shadow-[0_20px_50px_-25px_rgba(13,27,62,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100 lg:block">
                       <div className="flex items-center justify-between gap-2">
                         <span className="text-[11px] text-muted-foreground">
                           {String(i + 1).padStart(2, "0")}
@@ -455,7 +601,14 @@ function Pillars() {
                           <Icon className="h-3.5 w-3.5" />
                         </span>
                       </div>
-                      <p className="mt-1 text-xs leading-relaxed text-[#1F2937]">{p.d}</p>
+                      <ul className="mt-2 space-y-1">
+                        {p.lines.map((line, li) => (
+                          <li key={li} className="flex items-start gap-1.5 text-xs leading-relaxed text-[#1F2937]">
+                            <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#0D1B3E]/40" />
+                            {line}
+                          </li>
+                        ))}
+                      </ul>
                       <span className="absolute -bottom-1 right-1/2 h-2 w-2 translate-x-1/2 rotate-45 border-b border-l border-[#0D1B3E]/10 bg-white" />
                     </div>
 
@@ -525,7 +678,7 @@ function Pillars() {
           <div
             className="mx-auto mt-4 max-w-4xl overflow-hidden transition-[max-height,opacity,margin] duration-500 lg:hidden"
             style={{
-              maxHeight: active !== null ? 220 : 0,
+              maxHeight: active !== null ? 280 : 0,
               opacity: active !== null ? 1 : 0,
               marginTop: active !== null ? 16 : 0,
             }}
@@ -539,13 +692,20 @@ function Pillars() {
                   </span>
                   <span className="text-sm font-bold text-[#0D1B3E]">{PILLARS[active].t}</span>
                 </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#1F2937]">{PILLARS[active].d}</p>
+                <ul className="mt-2 space-y-1">
+                  {PILLARS[active].lines.map((line, li) => (
+                    <li key={li} className="flex items-start gap-2 text-sm leading-relaxed text-[#1F2937]">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#0D1B3E]/40" />
+                      {line}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
           </div>
 
           <p className="mt-3 text-center text-[11px] text-muted-foreground lg:hidden">
-            اضغط على أي عمود لعرض الوصف
+            اضغط على أي عمود لعرض الأسئلة
           </p>
         </div>
       </div>
@@ -554,39 +714,96 @@ function Pillars() {
 }
 
 // ============================================================
-// SERVICES — with 3 interactive image cards
+// JOURNEY — 3-month roadmap
 // ============================================================
-function Services() {
+function Journey() {
   return (
-    <section id="services" className="relative bg-white py-20 lg:py-24">
+    <section id="journey" className="relative bg-white py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">ما نقدمه</span>
+            <span className="text-xs tracking-[0.25em] text-muted-foreground">رحلة التغيير</span>
             <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
-              ماذا نقدم لمتجرك؟
+              رحلة الثلاثة أشهر
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-loose text-muted-foreground">
-              خدمات تشغيلية مبنية على بيانات متجرك الفعلية، وموجّهة نحو قرارات قابلة للتنفيذ.
+            <p className="mt-4 max-w-2xl text-base leading-loose text-muted-foreground">
+              نرافقك خلال ثلاثة أشهر من التشخيص إلى التثبيت.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-10 grid items-start gap-10 lg:grid-cols-[1.1fr_1fr]">
-          <div className="grid gap-3 sm:grid-cols-2">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s} delay={i * 70}>
-                <div className="flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
-                  <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0D1B3E] text-[#F8F7F4]">
-                    <ICheck className="h-3.5 w-3.5" />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {JOURNEY.map((j, i) => (
+            <Reveal key={j.month} delay={i * 120}>
+              <div className="relative h-full rounded-2xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-6 transition hover:border-[#0D1B3E]/25 hover:bg-white sm:p-8">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0D1B3E] text-[10px] font-bold text-[#F8F7F4]">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm leading-relaxed text-[#1F2937] sm:text-base">{s}</span>
+                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{j.month}</span>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+                <h3 className="mt-4 text-xl font-bold text-[#0D1B3E]">{j.title}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {j.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm leading-relaxed text-[#1F2937]">
+                      <ICheck className="mt-0.5 h-4 w-4 shrink-0 text-[#0D1B3E]/70" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                {j.close && (
+                  <p className="mt-5 border-t border-[#0D1B3E]/10 pt-4 text-sm leading-relaxed text-muted-foreground">
+                    {j.close}
+                  </p>
+                )}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          {/* Collage image cards — distributed, interactive, with depth */}
+// ============================================================
+// SYSTEM SERVICE
+// ============================================================
+function SystemService() {
+  return (
+    <section id="system" className="relative py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="grid items-stretch gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <div className="text-right">
+              <span className="text-xs tracking-[0.25em] text-muted-foreground">خدمة مميزة</span>
+              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
+                خدمة بناء النظام التشغيلي
+              </h2>
+              <p className="mt-4 text-base leading-loose text-muted-foreground">
+                من أكثر الخدمات تميزاً في {BRAND_AR}.
+              </p>
+              <p className="mt-4 text-base leading-loose text-muted-foreground">
+                نقوم ببناء نظام تشغيلي داخلي خاص بالمتجر يساعد على تنظيم العمل اليومي وإدارة العمليات
+                بطريقة واضحة وسهلة.
+              </p>
+              <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                {SYSTEM_FEATURES.map((f, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2.5 rounded-xl border border-[#0D1B3E]/10 bg-white px-3.5 py-2.5 text-sm text-[#1F2937]"
+                  >
+                    <ICheck className="h-4 w-4 shrink-0 text-[#0D1B3E]/70" />
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 text-sm leading-loose text-muted-foreground">
+                ليس مجرد ملف أو دليل إجرائي. بل بيئة تشغيل متكاملة مصممة لتناسب طريقة عمل متجرك
+                واحتياجات فريقك.
+              </p>
+            </div>
+          </Reveal>
+
           <div className="relative">
             <div aria-hidden className="pointer-events-none absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.08),transparent_70%)]" />
             <div className="grid gap-5 sm:grid-cols-2">
@@ -608,7 +825,39 @@ function Services() {
 }
 
 // ============================================================
-// WHY — with 2 visual cards
+// OUTCOMES
+// ============================================================
+function Outcomes() {
+  return (
+    <section className="relative bg-white py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <Reveal>
+          <div className="text-right">
+            <h2 className="text-3xl font-bold leading-snug sm:text-4xl">
+              ماذا ستحصل عليه؟
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {OUTCOMES.map((item, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <div className="flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
+                <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0D1B3E] text-[#F8F7F4]">
+                  <ICheck className="h-3.5 w-3.5" />
+                </span>
+                <span className="text-sm leading-relaxed text-[#1F2937] sm:text-base">{item}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// WHY
 // ============================================================
 function Why() {
   return (
@@ -622,29 +871,15 @@ function Why() {
               </div>
               <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
               <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
-                لسنا جهة تقدم توصيات فقط
+                لماذا أعمدة؟
               </h2>
               <p className="relative mt-5 max-w-xl text-base leading-loose text-[#F8F7F4]/85 sm:text-lg">
-                نعمل على فهم تفاصيل المتجر من الداخل، ونحوّل الملاحظات إلى خطوات عملية قابلة للتنفيذ
-                والمتابعة. هدفنا ليس تقديم تقرير فقط، بل المساعدة في بناء أساس تشغيلي أكثر وضوحاً
-                واستقراراً يساعد المتجر على النمو بثقة.
+                لأننا نؤمن أن النمو الحقيقي لا يبدأ من زيادة الإنفاق.
               </p>
-              <div className="relative mt-7 grid gap-2.5 sm:grid-cols-2">
-                {[
-                  "تنفيذ ومتابعة لا توصيات فقط",
-                  "قرارات مبنية على بيانات",
-                  "خطط واضحة قابلة للقياس",
-                  "فهم عميق لواقع المتجر",
-                ].map((t, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2.5 rounded-xl border border-[#F8F7F4]/15 bg-white/5 px-3.5 py-2.5 text-sm text-[#F8F7F4]"
-                  >
-                    <ICheck className="h-4 w-4 shrink-0 text-[#F8F7F4]/90" />
-                    {t}
-                  </div>
-                ))}
-              </div>
+              <p className="relative mt-4 max-w-xl text-base leading-loose text-[#F8F7F4]/80 sm:text-lg">
+                بل يبدأ من بناء أساس قوي يستطيع المتجر الاعتماد عليه. عندما تصبح العمليات أوضح،
+                والقرارات أدق، والمسؤوليات محددة، يصبح النمو نتيجة طبيعية للعمل المنظم.
+              </p>
             </div>
           </Reveal>
 
@@ -691,11 +926,11 @@ function Contact() {
             <div className="text-right">
               <span className="text-xs tracking-[0.25em] text-muted-foreground">تواصل</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
-                ابدأ بخطوة واحدة نحو صورة أوضح لمتجرك
+                ابدأ رحلة التغيير
               </h2>
               <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
-                شاركنا معلومات متجرك الأساسية، وسنساعدك على معرفة أين تقف اليوم وما الأولويات التي
-                تستحق العمل عليها أولاً.
+                إذا كنت تبحث عن فهم أعمق لمتجرك وبناء نظام يساعدك على النمو بثقة أكبر، فنحن جاهزون
+                للبدء معك.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
