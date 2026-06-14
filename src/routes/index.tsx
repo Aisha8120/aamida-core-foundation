@@ -510,7 +510,8 @@ const T = {
       rights: "All rights reserved",
     },
   },
-} as const;
+};
+type TT = typeof T.ar;
 
 // ============================================================
 // Helpers
