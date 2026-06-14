@@ -416,8 +416,48 @@ function Problem() {
 // PILLARS
 // ============================================================
 function Pillars() {
+  // Short descriptions per spec
+  const SHORT = [
+    "نراجع دورة الطلب من لحظة الشراء حتى التسليم.",
+    "نقرأ أداء القنوات والنتائج بدل الاعتماد على الانطباع.",
+    "نكشف نقاط التعطّل داخل الفريق وسير العمل.",
+    "نحلل أسباب الإرجاع والتكرار والخسائر.",
+    "نقيس جودة التواصل والردود وتجربة العميل.",
+  ];
+  // Relative analytical "strength" per pillar — drives bar height (out of 100)
+  const STRENGTH = [78, 62, 88, 55, 72];
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const [started, setStarted] = useState(false);
+  const [labelsIn, setLabelsIn] = useState(false);
+  const [active, setActive] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setStarted(true);
+            // labels appear after pillars finish rising (5 * 120ms + 700ms anim)
+            const tm = window.setTimeout(() => setLabelsIn(true), 5 * 120 + 650);
+            io.unobserve(e.target);
+            return () => window.clearTimeout(tm);
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // axis max for bar scaling
+  const max = Math.max(...STRENGTH);
+
   return (
-    <section id="pillars" className="relative py-20 lg:py-24">
+    <section id="pillars" ref={sectionRef} className="relative py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal>
           <div className="text-right">
@@ -431,32 +471,154 @@ function Pillars() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {PILLARS.map((p, i) => {
-            const Icon = PILLAR_ICONS[i];
-            return (
-              <Reveal key={p.t} delay={i * 90}>
-                <article className="group relative h-full overflow-hidden rounded-2xl border border-[#0D1B3E]/8 bg-white p-5 transition hover:-translate-y-1 hover:border-[#0D1B3E]/30">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0D1B3E]/5 text-[#0D1B3E]">
-                    <Icon className="h-5 w-5" />
+        {/* Chart */}
+        <div className="mt-12">
+          <div
+            className="relative mx-auto max-w-4xl rounded-2xl border border-[#0D1B3E]/10 bg-white p-5 sm:p-8"
+            role="group"
+            aria-label="تحليل الأعمدة الخمسة"
+          >
+            {/* gridlines */}
+            <div aria-hidden className="pointer-events-none absolute inset-x-5 top-8 bottom-20 sm:inset-x-8 sm:bottom-24">
+              {[0, 1, 2, 3].map((g) => (
+                <div
+                  key={g}
+                  className="absolute inset-x-0 h-px bg-[#0D1B3E]/6"
+                  style={{ top: `${(g / 3) * 100}%` }}
+                />
+              ))}
+            </div>
+
+            {/* bars */}
+            <div className="relative flex h-[220px] items-end justify-between gap-3 sm:h-[260px] sm:gap-6">
+              {PILLARS.map((p, i) => {
+                const Icon = PILLAR_ICONS[i];
+                const targetPct = (STRENGTH[i] / max) * 100;
+                const heightPct = started ? targetPct : 0;
+                const isActive = active === i;
+                return (
+                  <div
+                    key={p.t}
+                    className="group relative flex h-full flex-1 flex-col items-center justify-end"
+                  >
+                    {/* hover tooltip (desktop) */}
+                    <div
+                      className="pointer-events-none absolute bottom-full z-10 mb-3 hidden w-56 -translate-y-0 rounded-xl border border-[#0D1B3E]/10 bg-white p-3 text-right opacity-0 shadow-[0_20px_50px_-25px_rgba(13,27,62,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100 lg:block"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[11px] text-muted-foreground">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0D1B3E]">
+                          {p.t}
+                          <Icon className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs leading-relaxed text-[#1F2937]">{SHORT[i]}</p>
+                      <span className="absolute -bottom-1 right-1/2 h-2 w-2 translate-x-1/2 rotate-45 border-b border-l border-[#0D1B3E]/10 bg-white" />
+                    </div>
+
+                    {/* clickable bar */}
+                    <button
+                      type="button"
+                      aria-label={p.t}
+                      aria-expanded={isActive}
+                      onClick={() => setActive(isActive ? null : i)}
+                      className={`relative w-9 origin-bottom overflow-hidden rounded-t-md bg-[#0D1B3E] outline-none transition-[height,transform,box-shadow] duration-700 ease-out sm:w-14 lg:w-16 lg:group-hover:-translate-y-2 lg:group-hover:shadow-[0_18px_40px_-20px_rgba(13,27,62,0.6)] ${
+                        isActive ? "-translate-y-2 shadow-[0_18px_40px_-20px_rgba(13,27,62,0.6)]" : ""
+                      }`}
+                      style={{
+                        height: `${heightPct}%`,
+                        transitionDelay: started ? `${i * 120}ms` : "0ms",
+                      }}
+                    >
+                      {/* subtle inner highlight */}
+                      <span aria-hidden className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/15 to-transparent" />
+                      {/* score chip on top of bar */}
+                      <span
+                        className="absolute left-1/2 top-2 -translate-x-1/2 text-[10px] font-semibold text-white/85 transition-opacity"
+                        style={{ opacity: labelsIn ? 1 : 0 }}
+                      >
+                        {STRENGTH[i]}
+                      </span>
+                    </button>
                   </div>
-                  <div className="mt-4 flex items-baseline justify-between">
-                    <h3 className="text-base font-bold text-[#0D1B3E]">{p.t}</h3>
-                    <span className="text-[11px] text-muted-foreground">
-                      {String(i + 1).padStart(2, "0")}
+                );
+              })}
+            </div>
+
+            {/* baseline */}
+            <div className="mt-2 h-px w-full bg-[#0D1B3E]/15" />
+
+            {/* labels */}
+            <div className="mt-3 flex items-start justify-between gap-3 sm:gap-6">
+              {PILLARS.map((p, i) => {
+                const Icon = PILLAR_ICONS[i];
+                const isActive = active === i;
+                return (
+                  <button
+                    key={p.t}
+                    type="button"
+                    onClick={() => setActive(isActive ? null : i)}
+                    className="flex flex-1 flex-col items-center gap-1.5 text-center transition"
+                    style={{
+                      opacity: labelsIn ? 1 : 0,
+                      transform: labelsIn ? "translateY(0)" : "translateY(6px)",
+                      transition: `opacity 500ms ease ${i * 80}ms, transform 500ms ease ${i * 80}ms`,
+                    }}
+                    aria-label={p.t}
+                  >
+                    <Icon
+                      className={`h-4 w-4 transition-colors ${
+                        isActive ? "text-[#0D1B3E]" : "text-[#0D1B3E]/60"
+                      }`}
+                    />
+                    <span
+                      className={`text-[11px] font-bold sm:text-xs ${
+                        isActive ? "text-[#0D1B3E]" : "text-[#0D1B3E]/80"
+                      }`}
+                    >
+                      {p.t}
                     </span>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
-                  <div className="absolute inset-x-0 bottom-0 h-0.5 origin-right scale-x-0 bg-[#0D1B3E] transition-transform duration-500 group-hover:scale-x-100" />
-                </article>
-              </Reveal>
-            );
-          })}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile / tap description card */}
+          <div
+            className="mx-auto mt-4 max-w-4xl overflow-hidden transition-[max-height,opacity,margin] duration-500 lg:hidden"
+            style={{
+              maxHeight: active !== null ? 200 : 0,
+              opacity: active !== null ? 1 : 0,
+              marginTop: active !== null ? 16 : 0,
+            }}
+            aria-live="polite"
+          >
+            {active !== null && (
+              <div className="rounded-xl border border-[#0D1B3E]/10 bg-white p-4 text-right">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] text-muted-foreground">
+                    {String(active + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm font-bold text-[#0D1B3E]">{PILLARS[active].t}</span>
+                </div>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#1F2937]">{SHORT[active]}</p>
+              </div>
+            )}
+          </div>
+
+          <p className="mt-3 text-center text-[11px] text-muted-foreground lg:hidden">
+            اضغط على أي عمود لعرض الوصف
+          </p>
         </div>
       </div>
     </section>
   );
 }
+
+
 
 // ============================================================
 // SERVICES
