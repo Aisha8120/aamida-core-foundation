@@ -1,14 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode, type SVGProps } from "react";
 
+import collageHero from "@/assets/collage-hero.png.asset.json";
+import imgAnalysis from "@/assets/analysis.png.asset.json";
+import imgMonitoring from "@/assets/monitoring.png.asset.json";
+import imgDevices from "@/assets/devices.png.asset.json";
+import imgHandshake from "@/assets/handshake.png.asset.json";
+import imgPointer from "@/assets/pointer.png.asset.json";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "أعمدة | تحليل تشغيلي للمتاجر الإلكترونية" },
+      { title: "أعمدة | نبني الأساس الذي ينمو عليه متجرك" },
       {
         name: "description",
         content:
-          "أعمدة تساعد المتاجر الإلكترونية على فهم وضعها التشغيلي وبناء خطة تنفيذ واضحة تقلل الفوضى وتدعم النمو.",
+          "أعمدة تساعد المتاجر الإلكترونية على فهم واقعها التشغيلي وبناء خطة تنفيذ واضحة تقلل الفوضى وتدعم النمو.",
       },
     ],
   }),
@@ -16,57 +23,37 @@ export const Route = createFileRoute("/")({
 });
 
 // ============================================================
-// EASY-TO-EDIT CONFIG
+// CONFIG
 // ============================================================
-const WHATSAPP_NUMBER = "966500000000"; // ← غيّر هنا
+const WHATSAPP_NUMBER = "966500000000";
 const BRAND_AR = "أعمدة";
 
 const PILLARS: { t: string; d: string }[] = [
-  {
-    t: "الطلبات",
-    d: "نراجع دورة الطلب من الإنشاء حتى التسليم: زمن المعالجة، نسب الإلغاء، ودقة التنفيذ.",
-  },
-  {
-    t: "التسويق",
-    d: "نقرأ أداء القنوات والكلفة الفعلية للطلب، ونربط الحملات بمؤشرات تشغيلية لا بأرقام مظهرية.",
-  },
-  {
-    t: "العمليات",
-    d: "نوثّق إجراءات الفريق ونحدد نقاط الاحتكاك التي تستهلك الوقت وتؤخر التنفيذ اليومي.",
-  },
-  {
-    t: "المرتجعات",
-    d: "نحلل أسباب الإرجاع ونصمم آلية معالجة تقلل التكرار وتحمي هامش الربح.",
-  },
-  {
-    t: "العملاء",
-    d: "نقيس تجربة العميل عبر نقاط التواصل، ونربط خدمة العملاء بمؤشرات أداء قابلة للقياس.",
-  },
-];
-
-const PROBLEM_POINTS = [
-  "طلبات كثيرة بدون تنظيم واضح",
-  "تسويق يعمل دون قراءة حقيقية للنتائج",
-  "عمليات يومية تعتمد على الأشخاص لا على النظام",
-  "خدمة عملاء غير مرتبطة بمؤشرات أداء",
-  "قرارات تُتخذ بالانطباع لا بالبيانات",
+  { t: "الطلبات", d: "نحلل رحلة الطلب من لحظة الشراء حتى التسليم لضمان كفاءة التنفيذ وتقليل الأخطاء." },
+  { t: "التسويق", d: "نراجع القنوات التسويقية والأداء الفعلي للوصول إلى قرارات مبنية على البيانات." },
+  { t: "العمليات", d: "نقيم سير العمل الداخلي ونقاط التعطل والتحديات التشغيلية اليومية." },
+  { t: "المرتجعات", d: "نحدد أسباب المرتجعات وتأثيرها على الربحية وتجربة العميل." },
+  { t: "العملاء", d: "نقيس جودة الخدمة وتجربة العميل ومستوى الرضا والاحتفاظ بالعملاء." },
 ];
 
 const SERVICES = [
-  "تحليل تشغيلي شامل للمتجر",
-  "تحديد نقاط القوة والضعف",
-  "بناء خطة تحسين لمدة 3 أشهر",
+  "تحليل تشغيلي شامل",
+  "دراسة نقاط القوة والضعف",
+  "بناء خطة تطوير واضحة",
   "تنظيم مؤشرات الأداء",
-  "متابعة التنفيذ مع الفريق",
-  "إعداد تقارير واضحة للإدارة",
+  "متابعة التنفيذ والتحسين",
+  "تقارير إدارية تساعد على اتخاذ القرار",
 ];
 
-const STEPS = [
-  { n: "01", t: "نجمع بيانات المتجر", d: "نطّلع على الأرقام، الأدوات، والإجراءات الحالية." },
-  { n: "02", t: "نحلل الوضع الحالي", d: "نقرأ الفجوات في الأعمدة الخمسة ونوثّق ما يحدث فعلاً." },
-  { n: "03", t: "نحدد الأولويات", d: "نختار المعالجات الأعلى أثراً والأقل تعقيداً للبدء." },
-  { n: "04", t: "نبني خطة التنفيذ", d: "خطة 90 يوماً بمسؤوليات واضحة ونتائج قابلة للقياس." },
-  { n: "05", t: "نتابع النتائج", d: "نراجع الأداء أسبوعياً ونحدّث التوصيات بناءً على البيانات." },
+const SERVICE_VISUALS: { src: string; t: string }[] = [
+  { src: imgAnalysis.url, t: "تحليل البيانات" },
+  { src: imgMonitoring.url, t: "متابعة الأداء" },
+  { src: imgDevices.url, t: "تنظيم القنوات" },
+];
+
+const WHY_VISUALS: { src: string; t: string }[] = [
+  { src: imgHandshake.url, t: "شراكة تنفيذية" },
+  { src: imgPointer.url, t: "توجيه دقيق" },
 ];
 
 const waLink = (msg: string) =>
@@ -119,7 +106,7 @@ function Reveal({
 }
 
 // ============================================================
-// LINE ICONS
+// ICONS
 // ============================================================
 type IconProps = SVGProps<SVGSVGElement>;
 const stroke = {
@@ -198,7 +185,41 @@ function IWa(p: IconProps) {
 const PILLAR_ICONS = [IBox, IMega, ICog, IReturn, IUsers];
 
 // ============================================================
-// LANDING PAGE
+// VISUAL CARD (interactive image)
+// ============================================================
+function VisualCard({
+  src,
+  title,
+  className = "",
+}: {
+  src: string;
+  title: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-2xl border border-[#0D1B3E]/10 bg-white shadow-[0_10px_30px_-20px_rgba(13,27,62,0.25)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-25px_rgba(13,27,62,0.45)] ${className}`}
+    >
+      <div className="aspect-[4/3] w-full overflow-hidden">
+        <img
+          src={src}
+          alt={title}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0D1B3E]/55 via-[#0D1B3E]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-right opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="inline-flex items-center rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-[#0D1B3E] backdrop-blur">
+          {title}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// LANDING
 // ============================================================
 function LandingPage() {
   useEffect(() => {
@@ -210,10 +231,8 @@ function LandingPage() {
       <Header />
       <main className="relative">
         <Hero />
-        <Problem />
         <Pillars />
         <Services />
-        <Process />
         <Why />
         <Contact />
       </main>
@@ -246,10 +265,9 @@ function Header() {
           <span className="truncate text-base font-bold tracking-wide text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-          <a href="#problem" className="hover:text-[#0D1B3E] transition">المشكلة</a>
           <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
           <a href="#services" className="hover:text-[#0D1B3E] transition">ما نقدمه</a>
-          <a href="#process" className="hover:text-[#0D1B3E] transition">طريقة العمل</a>
+          <a href="#why" className="hover:text-[#0D1B3E] transition">لماذا أعمدة</a>
           <a href="#contact" className="hover:text-[#0D1B3E] transition">تواصل</a>
         </nav>
         <a
@@ -293,16 +311,16 @@ function Hero() {
             className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
             style={{ animationDelay: "100ms" }}
           >
-            نحو متجر يعمل بوضوح…
+            نبني الأساس الذي
             <br />
-            لا بعشوائية
+            ينمو عليه متجرك
           </h1>
           <p
             className="animate-fade-up mt-6 max-w-xl text-base leading-loose text-muted-foreground sm:text-lg"
             style={{ animationDelay: "220ms" }}
           >
-            في {BRAND_AR} نساعد المتاجر الإلكترونية على فهم وضعها الحالي، كشف نقاط الضعف، وتنظيم
-            العمليات اليومية من خلال تحليل تشغيلي واضح وخطة تنفيذ قابلة للتطبيق.
+            في {BRAND_AR} نساعد المتاجر الإلكترونية على فهم واقعها التشغيلي، كشف فرص التحسين، وتنظيم
+            العمل اليومي من خلال تحليل شامل وخطة تنفيذ واضحة تركز على ما يصنع الفرق الحقيقي في النمو.
           </p>
           <div
             className="animate-fade-up mt-8 flex flex-wrap gap-3"
@@ -324,44 +342,24 @@ function Hero() {
           </div>
         </div>
 
-        {/* Visual: five pillars rising */}
+        {/* Hero collage visual */}
         <div className="relative mx-auto w-full max-w-md">
-          <div className="rounded-3xl border border-[#0D1B3E]/10 bg-white p-6 shadow-[0_30px_80px_-40px_rgba(13,27,62,0.25)]">
-            <div className="flex items-end justify-center gap-3 pt-6">
-              {PILLARS.map((p, i) => (
-                <div key={i} className="flex flex-col items-center gap-2">
-                  <div
-                    className="animate-pillar w-9 origin-bottom rounded-t-md bg-[#0D1B3E] sm:w-11"
-                    style={{
-                      height: `${110 + i * 14}px`,
-                      animationDelay: `${300 + i * 110}ms`,
-                    }}
-                  />
-                </div>
-              ))}
+          <div
+            className="group relative overflow-hidden rounded-3xl border border-[#0D1B3E]/10 bg-[#0D1B3E] shadow-[0_30px_80px_-40px_rgba(13,27,62,0.45)] transition-all duration-700 hover:-translate-y-1"
+            style={{ animationDelay: "400ms" }}
+          >
+            <div className="aspect-[4/5] w-full overflow-hidden">
+              <img
+                src={collageHero.url}
+                alt="لوحة تشغيلية لمتجر إلكتروني"
+                className="h-full w-full object-cover object-center opacity-95 transition-transform duration-700 group-hover:scale-[1.03]"
+              />
             </div>
-            <div className="mt-3 h-px hairline" />
-            <div className="mt-3 flex justify-center gap-3 sm:gap-5">
-              {PILLARS.map((p, i) => (
-                <span
-                  key={i}
-                  className="w-9 text-center text-[10px] font-medium text-[#0D1B3E]/70 sm:w-11"
-                >
-                  {p.t}
-                </span>
-              ))}
-            </div>
-            <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-              {[
-                { v: "−38%", l: "زمن التنفيذ" },
-                { v: "−24%", l: "المرتجعات" },
-                { v: "+31%", l: "رضا العملاء" },
-              ].map((k, i) => (
-                <div key={i} className="rounded-xl bg-[#F8F7F4] p-3">
-                  <div className="text-lg font-bold text-[#0D1B3E]">{k.v}</div>
-                  <div className="mt-0.5 text-[10px] text-muted-foreground">{k.l}</div>
-                </div>
-              ))}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-[#0D1B3E] backdrop-blur">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
+                صورة تشغيلية شاملة
+              </div>
             </div>
           </div>
           <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
@@ -372,61 +370,10 @@ function Hero() {
 }
 
 // ============================================================
-// PROBLEM
-// ============================================================
-function Problem() {
-  return (
-    <section id="problem" className="relative py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <Reveal>
-            <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">المشكلة</span>
-              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
-                المشكلة ليست دائماً
-                <br />
-                في المبيعات
-              </h2>
-              <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
-                كثير من المتاجر تملك منتجات جيدة وطلبات مستمرة، لكنها تعاني من تأخر التنفيذ، ضعف
-                المتابعة، تشتت الفريق، ارتفاع المرتجعات، أو غياب مؤشرات واضحة لاتخاذ القرار.
-              </p>
-            </div>
-          </Reveal>
-
-          <ul className="grid gap-3">
-            {PROBLEM_POINTS.map((p, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <li className="group flex items-start gap-4 rounded-2xl border border-[#0D1B3E]/8 bg-white p-4 transition hover:border-[#0D1B3E]/25 hover:-translate-y-0.5">
-                  <span className="mt-0.5 inline-grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0D1B3E]/5 text-[11px] font-semibold text-[#0D1B3E]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-sm leading-relaxed text-[#1F2937] sm:text-base">{p}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================
 // PILLARS
 // ============================================================
 function Pillars() {
-  // Short descriptions per spec
-  const SHORT = [
-    "نراجع دورة الطلب من لحظة الشراء حتى التسليم.",
-    "نقرأ أداء القنوات والنتائج بدل الاعتماد على الانطباع.",
-    "نكشف نقاط التعطّل داخل الفريق وسير العمل.",
-    "نحلل أسباب الإرجاع والتكرار والخسائر.",
-    "نقيس جودة التواصل والردود وتجربة العميل.",
-  ];
-  // Relative analytical "strength" per pillar — drives bar height (out of 100)
   const STRENGTH = [78, 62, 88, 55, 72];
-
   const sectionRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
   const [labelsIn, setLabelsIn] = useState(false);
@@ -440,7 +387,6 @@ function Pillars() {
         for (const e of entries) {
           if (e.isIntersecting) {
             setStarted(true);
-            // labels appear after pillars finish rising (5 * 120ms + 700ms anim)
             const tm = window.setTimeout(() => setLabelsIn(true), 5 * 120 + 650);
             io.unobserve(e.target);
             return () => window.clearTimeout(tm);
@@ -453,7 +399,6 @@ function Pillars() {
     return () => io.disconnect();
   }, []);
 
-  // axis max for bar scaling
   const max = Math.max(...STRENGTH);
 
   return (
@@ -463,22 +408,21 @@ function Pillars() {
           <div className="text-right">
             <span className="text-xs tracking-[0.25em] text-muted-foreground">الأعمدة الخمسة</span>
             <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-snug sm:text-4xl">
-              نحلل المتجر من خلال خمسة أعمدة أساسية
+              كل متجر ناجح يرتكز على خمسة أعمدة
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-loose text-muted-foreground">
-              كل عمود يُقيَّم على حدة ثم تُربط النتائج معاً لرسم صورة كاملة لواقع التشغيل.
+              نقوم بدراسة متجرك من خلال خمسة محاور مترابطة تساعدنا على اكتشاف نقاط القوة والضعف
+              وتحديد الأولويات التي تستحق التركيز.
             </p>
           </div>
         </Reveal>
 
-        {/* Chart */}
         <div className="mt-12">
           <div
             className="relative mx-auto max-w-4xl rounded-2xl border border-[#0D1B3E]/10 bg-white p-5 sm:p-8"
             role="group"
-            aria-label="تحليل الأعمدة الخمسة"
+            aria-label="الأعمدة الخمسة"
           >
-            {/* gridlines */}
             <div aria-hidden className="pointer-events-none absolute inset-x-5 top-8 bottom-20 sm:inset-x-8 sm:bottom-24">
               {[0, 1, 2, 3].map((g) => (
                 <div
@@ -489,7 +433,6 @@ function Pillars() {
               ))}
             </div>
 
-            {/* bars */}
             <div className="relative flex h-[220px] items-end justify-between gap-3 sm:h-[260px] sm:gap-6">
               {PILLARS.map((p, i) => {
                 const Icon = PILLAR_ICONS[i];
@@ -501,10 +444,7 @@ function Pillars() {
                     key={p.t}
                     className="group relative flex h-full flex-1 flex-col items-center justify-end"
                   >
-                    {/* hover tooltip (desktop) */}
-                    <div
-                      className="pointer-events-none absolute bottom-full z-10 mb-3 hidden w-56 -translate-y-0 rounded-xl border border-[#0D1B3E]/10 bg-white p-3 text-right opacity-0 shadow-[0_20px_50px_-25px_rgba(13,27,62,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100 lg:block"
-                    >
+                    <div className="pointer-events-none absolute bottom-full z-10 mb-3 hidden w-60 -translate-y-0 rounded-xl border border-[#0D1B3E]/10 bg-white p-3 text-right opacity-0 shadow-[0_20px_50px_-25px_rgba(13,27,62,0.4)] transition-all duration-300 group-hover:-translate-y-1 group-hover:opacity-100 lg:block">
                       <div className="flex items-center justify-between gap-2">
                         <span className="text-[11px] text-muted-foreground">
                           {String(i + 1).padStart(2, "0")}
@@ -514,11 +454,10 @@ function Pillars() {
                           <Icon className="h-3.5 w-3.5" />
                         </span>
                       </div>
-                      <p className="mt-1 text-xs leading-relaxed text-[#1F2937]">{SHORT[i]}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-[#1F2937]">{p.d}</p>
                       <span className="absolute -bottom-1 right-1/2 h-2 w-2 translate-x-1/2 rotate-45 border-b border-l border-[#0D1B3E]/10 bg-white" />
                     </div>
 
-                    {/* clickable bar */}
                     <button
                       type="button"
                       aria-label={p.t}
@@ -532,9 +471,7 @@ function Pillars() {
                         transitionDelay: started ? `${i * 120}ms` : "0ms",
                       }}
                     >
-                      {/* subtle inner highlight */}
                       <span aria-hidden className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/15 to-transparent" />
-                      {/* score chip on top of bar */}
                       <span
                         className="absolute left-1/2 top-2 -translate-x-1/2 text-[10px] font-semibold text-white/85 transition-opacity"
                         style={{ opacity: labelsIn ? 1 : 0 }}
@@ -547,10 +484,8 @@ function Pillars() {
               })}
             </div>
 
-            {/* baseline */}
             <div className="mt-2 h-px w-full bg-[#0D1B3E]/15" />
 
-            {/* labels */}
             <div className="mt-3 flex items-start justify-between gap-3 sm:gap-6">
               {PILLARS.map((p, i) => {
                 const Icon = PILLAR_ICONS[i];
@@ -586,11 +521,10 @@ function Pillars() {
             </div>
           </div>
 
-          {/* Mobile / tap description card */}
           <div
             className="mx-auto mt-4 max-w-4xl overflow-hidden transition-[max-height,opacity,margin] duration-500 lg:hidden"
             style={{
-              maxHeight: active !== null ? 200 : 0,
+              maxHeight: active !== null ? 220 : 0,
               opacity: active !== null ? 1 : 0,
               marginTop: active !== null ? 16 : 0,
             }}
@@ -604,7 +538,7 @@ function Pillars() {
                   </span>
                   <span className="text-sm font-bold text-[#0D1B3E]">{PILLARS[active].t}</span>
                 </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#1F2937]">{SHORT[active]}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#1F2937]">{PILLARS[active].d}</p>
               </div>
             )}
           </div>
@@ -618,26 +552,26 @@ function Pillars() {
   );
 }
 
-
-
 // ============================================================
-// SERVICES
+// SERVICES — with 3 interactive image cards
 // ============================================================
 function Services() {
   return (
     <section id="services" className="relative bg-white py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.2fr]">
-          <Reveal>
-            <div className="text-right">
-              <span className="text-xs tracking-[0.25em] text-muted-foreground">ما نقدمه</span>
-              <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">ماذا نقدم؟</h2>
-              <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
-                خدمات تشغيلية مبنية على بيانات متجرك الفعلية، وموجّهة نحو قرارات قابلة للتنفيذ.
-              </p>
-            </div>
-          </Reveal>
+        <Reveal>
+          <div className="text-right">
+            <span className="text-xs tracking-[0.25em] text-muted-foreground">ما نقدمه</span>
+            <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
+              ماذا نقدم لمتجرك؟
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-loose text-muted-foreground">
+              خدمات تشغيلية مبنية على بيانات متجرك الفعلية، وموجّهة نحو قرارات قابلة للتنفيذ.
+            </p>
+          </div>
+        </Reveal>
 
+        <div className="mt-10 grid items-start gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div className="grid gap-3 sm:grid-cols-2">
             {SERVICES.map((s, i) => (
               <Reveal key={s} delay={i * 70}>
@@ -650,51 +584,23 @@ function Services() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-// ============================================================
-// PROCESS — horizontal on desktop, vertical on mobile
-// ============================================================
-function Process() {
-  return (
-    <section id="process" className="relative py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <Reveal>
-          <div className="text-right">
-            <span className="text-xs tracking-[0.25em] text-muted-foreground">طريقة العمل</span>
-            <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">كيف نعمل معك؟</h2>
+          {/* Image cards — desktop grid, mobile horizontal slider */}
+          <div className="-mx-5 lg:mx-0">
+            <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0">
+              {SERVICE_VISUALS.map((v, i) => (
+                <Reveal
+                  key={v.t}
+                  delay={i * 100}
+                  className={`w-[78%] shrink-0 snap-start lg:w-auto ${
+                    i === 0 ? "lg:col-span-2" : ""
+                  }`}
+                >
+                  <VisualCard src={v.src} title={v.t} />
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </Reveal>
-
-        <div className="relative mt-12">
-          <div
-            aria-hidden
-            className="absolute hidden lg:block lg:inset-x-0 lg:top-5 lg:h-px lg:bg-gradient-to-l lg:from-transparent lg:via-[#0D1B3E]/30 lg:to-transparent"
-          />
-          <div
-            aria-hidden
-            className="absolute right-[15px] top-0 h-full w-px bg-gradient-to-b from-transparent via-[#0D1B3E]/30 to-transparent lg:hidden"
-          />
-
-          <ol className="grid gap-8 lg:grid-cols-5 lg:gap-4">
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 100}>
-                <li className="relative flex gap-4 lg:flex-col lg:gap-4">
-                  <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#0D1B3E]/40 bg-[#F8F7F4] text-xs font-bold text-[#0D1B3E]">
-                    {s.n}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-base font-bold text-[#0D1B3E]">{s.t}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
-                  </div>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
         </div>
       </div>
     </section>
@@ -702,44 +608,54 @@ function Process() {
 }
 
 // ============================================================
-// WHY
+// WHY — with 2 visual cards
 // ============================================================
 function Why() {
   return (
     <section id="why" className="relative py-20 lg:py-24">
-      <div className="mx-auto max-w-5xl px-5 lg:px-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-[#0D1B3E]/15 bg-[#0D1B3E] p-8 text-right text-[#F8F7F4] sm:p-12">
-            <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
-              <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <div className="grid items-stretch gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal>
+            <div className="relative h-full overflow-hidden rounded-3xl border border-[#0D1B3E]/15 bg-[#0D1B3E] p-8 text-right text-[#F8F7F4] sm:p-10">
+              <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
+                <div className="absolute inset-0 soft-grid" style={{ filter: "invert(1)" }} />
+              </div>
+              <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
+              <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
+                لسنا جهة تقدم توصيات فقط
+              </h2>
+              <p className="relative mt-5 max-w-xl text-base leading-loose text-[#F8F7F4]/85 sm:text-lg">
+                نعمل على فهم تفاصيل المتجر من الداخل، ونحوّل الملاحظات إلى خطوات عملية قابلة للتنفيذ
+                والمتابعة. هدفنا ليس تقديم تقرير فقط، بل المساعدة في بناء أساس تشغيلي أكثر وضوحاً
+                واستقراراً يساعد المتجر على النمو بثقة.
+              </p>
+              <div className="relative mt-7 grid gap-2.5 sm:grid-cols-2">
+                {[
+                  "تنفيذ ومتابعة لا توصيات فقط",
+                  "قرارات مبنية على بيانات",
+                  "خطط واضحة قابلة للقياس",
+                  "فهم عميق لواقع المتجر",
+                ].map((t, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2.5 rounded-xl border border-[#F8F7F4]/15 bg-white/5 px-3.5 py-2.5 text-sm text-[#F8F7F4]"
+                  >
+                    <ICheck className="h-4 w-4 shrink-0 text-[#F8F7F4]/90" />
+                    {t}
+                  </div>
+                ))}
+              </div>
             </div>
-            <span className="relative text-xs tracking-[0.3em] text-[#F8F7F4]/70">لماذا أعمدة</span>
-            <h2 className="relative mt-3 text-3xl font-bold leading-snug text-[#F8F7F4] sm:text-4xl">
-              لأننا ننظر للمتجر من زاوية التشغيل الكامل
-            </h2>
-            <p className="relative mt-5 max-w-2xl text-base leading-loose text-[#F8F7F4]/85 sm:text-lg">
-              لأننا لا ننظر للمتجر من زاوية التسويق فقط، بل من زاوية التشغيل الكامل: كيف تُدار
-              الطلبات، كيف يتحرك الفريق، أين تتكرر الأخطاء، وما القرارات التي تحتاجها الإدارة لتحسين
-              الأداء.
-            </p>
+          </Reveal>
 
-            <div className="relative mt-8 grid gap-3 sm:grid-cols-3">
-              {[
-                "نظرة تشغيلية لا تسويقية",
-                "قرارات مبنية على بيانات",
-                "خطط قابلة للتنفيذ والمتابعة",
-              ].map((t, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2.5 rounded-xl border border-[#F8F7F4]/15 bg-white/5 px-4 py-3 text-sm text-[#F8F7F4]"
-                >
-                  <ICheck className="h-4 w-4 shrink-0 text-[#F8F7F4]/90" />
-                  {t}
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            {WHY_VISUALS.map((v, i) => (
+              <Reveal key={v.t} delay={i * 120}>
+                <VisualCard src={v.src} title={v.t} />
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -776,11 +692,11 @@ function Contact() {
             <div className="text-right">
               <span className="text-xs tracking-[0.25em] text-muted-foreground">تواصل</span>
               <h2 className="mt-3 text-3xl font-bold leading-snug sm:text-4xl">
-                ابدأ من فهم وضع متجرك الحالي
+                ابدأ بخطوة واحدة نحو صورة أوضح لمتجرك
               </h2>
               <p className="mt-5 max-w-md text-base leading-loose text-muted-foreground">
-                شاركنا بيانات متجرك الأساسية، وسنساعدك على تحديد أين تقف اليوم وما الذي يحتاج إلى
-                تحسين أولاً.
+                شاركنا معلومات متجرك الأساسية، وسنساعدك على معرفة أين تقف اليوم وما الأولويات التي
+                تستحق العمل عليها أولاً.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -820,25 +736,30 @@ function Contact() {
                 <div className="sm:col-span-2">
                   <label className="block text-right">
                     <span className="mb-1.5 block text-xs text-[#0D1B3E]/70">
-                      أخبرنا باختصار عن التحدي الحالي
+                      نبذة عن وضع المتجر
                     </span>
                     <textarea
                       name="msg"
                       rows={4}
-                      className="w-full resize-none rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-3 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E] focus:ring-2 focus:ring-[#0D1B3E]/15"
+                      className="w-full rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-2.5 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E]/40 focus:bg-white"
+                      placeholder="مثال: نواجه تأخراً في تنفيذ الطلبات وارتفاعاً في المرتجعات…"
                     />
                   </label>
                 </div>
               </div>
+
               <button
                 type="submit"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0D1B3E] px-5 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5 sm:w-auto"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0D1B3E] px-5 py-3 text-sm font-medium text-[#F8F7F4] transition hover:-translate-y-0.5"
               >
-                إرسال عبر واتساب
+                إرسال الطلب
                 <IArrow className="h-4 w-4 rotate-180" />
               </button>
+
               {sent && (
-                <p className="mt-3 text-xs text-muted-foreground">يتم فتح واتساب برسالتك…</p>
+                <p className="mt-3 text-center text-xs text-[#0D1B3E]/70">
+                  تم فتح واتساب لإكمال الإرسال. سنعود إليك خلال 24 ساعة.
+                </p>
               )}
             </form>
           </Reveal>
@@ -852,7 +773,7 @@ function Field({
   name,
   label,
   type = "text",
-  required,
+  required = false,
 }: {
   name: string;
   label: string;
@@ -861,15 +782,12 @@ function Field({
 }) {
   return (
     <label className="block text-right">
-      <span className="mb-1.5 block text-xs text-[#0D1B3E]/70">
-        {label}
-        {required && <span className="mx-1 text-[#0D1B3E]">*</span>}
-      </span>
+      <span className="mb-1.5 block text-xs text-[#0D1B3E]/70">{label}</span>
       <input
         name={name}
         type={type}
         required={required}
-        className="w-full rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-3 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E] focus:ring-2 focus:ring-[#0D1B3E]/15"
+        className="w-full rounded-xl border border-[#0D1B3E]/15 bg-[#F8F7F4] px-3.5 py-2.5 text-sm text-[#1F2937] outline-none transition focus:border-[#0D1B3E]/40 focus:bg-white"
       />
     </label>
   );
@@ -880,13 +798,14 @@ function Field({
 // ============================================================
 function Footer() {
   return (
-    <footer className="border-t border-[#0D1B3E]/10 py-10">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 text-sm text-muted-foreground sm:flex sm:justify-between lg:px-8">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <Logo className="h-6 w-6 shrink-0 text-[#0D1B3E]" />
-          <span className="truncate font-bold text-[#0D1B3E]">{BRAND_AR}</span>
+    <footer className="border-t border-[#0D1B3E]/10 py-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-center text-xs text-muted-foreground sm:flex-row sm:text-right lg:px-8">
+        <div className="flex items-center gap-2">
+          <Logo className="h-4 w-4 text-[#0D1B3E]" />
+          <span className="font-bold text-[#0D1B3E]">{BRAND_AR}</span>
+          <span>© {new Date().getFullYear()}</span>
         </div>
-        <div className="text-xs">© {new Date().getFullYear()} {BRAND_AR}. جميع الحقوق محفوظة.</div>
+        <div>تحليل تشغيلي للمتاجر الإلكترونية</div>
       </div>
     </footer>
   );
@@ -898,13 +817,13 @@ function Footer() {
 function FloatingWhatsApp() {
   return (
     <a
-      aria-label="WhatsApp"
-      href={waLink(`السلام عليكم ${BRAND_AR}، أرغب بالتواصل.`)}
+      href={waLink(`السلام عليكم ${BRAND_AR}، أرغب بتحليل متجري.`)}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5 sm:h-14 sm:w-14"
+      aria-label="تواصل واتساب"
+      className="fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5"
     >
-      <IWa className="h-6 w-6" />
+      <IWa className="h-5 w-5" />
     </a>
   );
 }
