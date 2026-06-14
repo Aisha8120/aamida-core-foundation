@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode, type SVGProps } from "react";
 
-import collageHero from "@/assets/collage-hero.png.asset.json";
-import collageNews from "@/assets/collage-news.png.asset.json";
-import collageReader from "@/assets/collage-reader.png.asset.json";
-import collageHandshake from "@/assets/collage-handshake.png.asset.json";
+import collageHero from "@/assets/collage-fistbump.png.asset.json";
+import collagePuzzle from "@/assets/collage-puzzle.jpg.asset.json";
+import collageTarget from "@/assets/collage-target.jpg.asset.json";
+import collageBridge from "@/assets/collage-bridge.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,11 +44,11 @@ const SERVICES = [
 ];
 
 const SERVICE_VISUALS: { src: string; t: string; rotate: string }[] = [
-  { src: collageNews.url, t: "قراءة دقيقة لواقع متجرك", rotate: "-rotate-1" },
-  { src: collageReader.url, t: "فهم ما خلف الأرقام", rotate: "rotate-1" },
+  { src: collagePuzzle.url, t: "نُركّب القطع المبعثرة في متجرك", rotate: "-rotate-1" },
+  { src: collageTarget.url, t: "نوجّه التركيز نحو ما يصنع الفرق", rotate: "rotate-1" },
 ];
 
-const WHY_VISUAL = { src: collageHandshake.url, t: "شراكة تنفيذية حقيقية" };
+const WHY_VISUAL = { src: collageBridge.url, t: "نعبر بك الفجوة نحو النمو" };
 
 const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
