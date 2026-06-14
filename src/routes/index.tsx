@@ -185,26 +185,29 @@ function VisualCard({
   src,
   title,
   className = "",
+  rotate = "",
 }: {
   src: string;
   title: string;
   className?: string;
+  rotate?: string;
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border border-[#0D1B3E]/10 bg-white shadow-[0_10px_30px_-20px_rgba(13,27,62,0.25)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-25px_rgba(13,27,62,0.45)] ${className}`}
+      className={`group relative overflow-hidden rounded-3xl border border-[#0D1B3E]/10 bg-gradient-to-br from-[#F8F7F4] to-white shadow-[0_25px_60px_-30px_rgba(13,27,62,0.35)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_35px_80px_-30px_rgba(13,27,62,0.55)] ${rotate} ${className}`}
     >
-      <div className="aspect-[4/3] w-full overflow-hidden">
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgba(13,27,62,0.07),transparent_70%)]" />
         <img
           src={src}
           alt={title}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-contain p-4 drop-shadow-[0_18px_25px_rgba(13,27,62,0.25)] transition-transform duration-700 group-hover:scale-[1.05] group-hover:-rotate-1"
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0D1B3E]/55 via-[#0D1B3E]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-right opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-        <span className="inline-flex items-center rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-[#0D1B3E] backdrop-blur">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1 p-3 text-right opacity-90 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#0D1B3E]/10 bg-white/95 px-3 py-1 text-xs font-bold text-[#0D1B3E] backdrop-blur shadow-sm">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
           {title}
         </span>
       </div>
@@ -579,18 +582,17 @@ function Services() {
             ))}
           </div>
 
-          {/* Image cards — desktop grid, mobile horizontal slider */}
-          <div className="-mx-5 lg:mx-0">
-            <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0">
+          {/* Collage image cards — distributed, interactive, with depth */}
+          <div className="relative">
+            <div aria-hidden className="pointer-events-none absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.08),transparent_70%)]" />
+            <div className="grid gap-5 sm:grid-cols-2">
               {SERVICE_VISUALS.map((v, i) => (
                 <Reveal
                   key={v.t}
-                  delay={i * 100}
-                  className={`w-[78%] shrink-0 snap-start lg:w-auto ${
-                    i === 0 ? "lg:col-span-2" : ""
-                  }`}
+                  delay={i * 120}
+                  className={i === 1 ? "sm:mt-10" : ""}
                 >
-                  <VisualCard src={v.src} title={v.t} />
+                  <VisualCard src={v.src} title={v.t} rotate={v.rotate} />
                 </Reveal>
               ))}
             </div>
@@ -642,13 +644,12 @@ function Why() {
             </div>
           </Reveal>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            {WHY_VISUALS.map((v, i) => (
-              <Reveal key={v.t} delay={i * 120}>
-                <VisualCard src={v.src} title={v.t} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={120}>
+            <div className="relative h-full">
+              <div aria-hidden className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
+              <VisualCard src={WHY_VISUAL.src} title={WHY_VISUAL.t} rotate="rotate-1" />
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
