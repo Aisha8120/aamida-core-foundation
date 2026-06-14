@@ -391,9 +391,8 @@ function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-16 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div className="text-right">
-          <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-[#0D1B3E]/15 bg-white/60 px-3 py-1 text-xs text-[#0D1B3E]/80 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#0D1B3E]" />
-            تحليل تشغيلي للمتاجر الإلكترونية
+          {/* Text removed as requested */}
+          <div className="animate-fade-up inline-flex items-center gap-2" style={{ animationDelay: "0ms" }}>
           </div>
           <h1
             className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
@@ -1027,7 +1026,7 @@ function Footer() {
           <span className="font-bold text-[#0D1B3E]">{BRAND_AR}</span>
           <span>© {new Date().getFullYear()}</span>
         </div>
-        <div>تحليل تشغيلي للمتاجر الإلكترونية</div>
+        <div></div>
       </div>
     </footer>
   );
