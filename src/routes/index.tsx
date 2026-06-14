@@ -274,6 +274,16 @@ const T = {
       ],
       pillarsMini: ["Orders", "Customers", "Operations", "Returns", "Marketing"],
     },
+    pinned: {
+      phrases: [
+        "We build the operating foundation",
+        "For sustainable growth",
+        "From chaos to a system",
+        "From operations to measurable growth",
+      ],
+      ctaBook: "Book Your Consultation",
+      ctaWa: "Contact on WhatsApp",
+    },
     problem: {
       title: "When sales grow without a clear system, operational gaps begin to appear",
       items: [
