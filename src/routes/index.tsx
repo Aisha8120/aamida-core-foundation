@@ -609,7 +609,7 @@ function Header({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
             <button onClick={toggleLang} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-foreground transition hover:bg-white/10">
               {t.langSwitch}
             </button>
-            <a href="#contact" className="relative inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-primary to-[oklch(0.6_0.18_250)] px-4 py-1.5 text-xs font-semibold text-primary-foreground shadow-[0_0_20px_-2px_oklch(0.65_0.18_245_/_0.6)] transition hover:shadow-[0_0_30px_-2px_oklch(0.7_0.2_245_/_0.8)]">
+            <a href="#contact" className="relative inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-primary to-[oklch(0.6_0.18_28)] px-4 py-1.5 text-xs font-semibold text-primary-foreground shadow-[0_0_20px_-2px_oklch(0.65_0.18_28_/_0.6)] transition hover:shadow-[0_0_30px_-2px_oklch(0.7_0.2_28_/_0.8)]">
               {t.cta.book}
               <Icon d={I.arrow} className="h-3.5 w-3.5 rtl:rotate-180" />
             </a>
@@ -646,7 +646,7 @@ function Header({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
 
 function BrandMark() {
   return (
-    <div className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.4_0.12_250)] to-[oklch(0.25_0.06_258)] border border-white/10 shadow-[inset_0_1px_0_oklch(1_0_0/0.1),0_0_18px_-4px_oklch(0.6_0.18_245/0.6)]">
+    <div className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.4_0.12_28)] to-[oklch(0.25_0.06_28)] border border-white/10 shadow-[inset_0_1px_0_oklch(1_0_0_/_0.1),0_0_18px_-4px_oklch(0.6_0.18_28_/_0.6)]">
       <svg viewBox="0 0 24 24" className="h-5 w-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
         <path d="M5 20V8M12 20V4M19 20v-9" />
         <path d="M3 20h18" />
@@ -694,7 +694,7 @@ function Hero({ t }: { t: TT }) {
     <section id="top" className="relative overflow-hidden">
       {/* background layers */}
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-50" />
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.2_245/0.35),transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.2_28_/_0.35),transparent_70%)] blur-3xl" />
       <Particles />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-16 pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:px-8 lg:pb-24 lg:pt-28">
@@ -715,7 +715,7 @@ function Hero({ t }: { t: TT }) {
           </Reveal>
           <Reveal delay={460}>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contact" className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_250)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_245/0.7)] transition-all hover:shadow-[0_0_45px_-4px_oklch(0.72_0.2_245/0.9)] hover:-translate-y-0.5">
+              <a href="#contact" className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_28)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_28_/_0.7)] transition-all hover:shadow-[0_0_45px_-4px_oklch(0.72_0.2_28_/_0.9)] hover:-translate-y-0.5">
                 <span>{t.hero.ctaBook}</span>
                 <Icon d={I.arrow} className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </a>
@@ -777,7 +777,7 @@ function Particles() {
             ["--dx" as any]: `${p.dx}px`,
             ["--dy" as any]: `${p.dy}px`,
             animation: `particle-drift ${p.d}s ease-in-out ${p.delay}s infinite`,
-            boxShadow: "0 0 8px oklch(0.7 0.18 245 / 0.7)",
+            boxShadow: "0 0 8px oklch(0.7 0.18 28 / 0.7)",
           }}
         />
       ))}
@@ -796,7 +796,7 @@ function OperationalCore({ labels }: { labels: string[] }) {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[460px]">
       {/* glow */}
-      <div className="pointer-events-none absolute inset-6 rounded-full bg-[radial-gradient(closest-side,oklch(0.5_0.2_245/0.35),transparent_70%)] blur-2xl animate-pulse-glow" />
+      <div className="pointer-events-none absolute inset-6 rounded-full bg-[radial-gradient(closest-side,oklch(0.5_0.2_28_/_0.35),transparent_70%)] blur-2xl animate-pulse-glow" />
       {/* rotating ring */}
       <div className="absolute inset-0 animate-spin-slow opacity-50">
         <div className="absolute inset-4 rounded-full border border-dashed border-white/10" />
@@ -806,14 +806,14 @@ function OperationalCore({ labels }: { labels: string[] }) {
       <svg viewBox="0 0 400 400" className="relative h-full w-full">
         <defs>
           <radialGradient id="hubGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="oklch(0.85 0.16 240)" />
-            <stop offset="60%" stopColor="oklch(0.55 0.18 250)" />
-            <stop offset="100%" stopColor="oklch(0.25 0.08 258)" />
+            <stop offset="0%" stopColor="oklch(0.85 0.16 28)" />
+            <stop offset="60%" stopColor="oklch(0.55 0.18 28)" />
+            <stop offset="100%" stopColor="oklch(0.25 0.08 28)" />
           </radialGradient>
           <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="oklch(0.7 0.18 245 / 0)" />
-            <stop offset="50%" stopColor="oklch(0.75 0.18 245 / 0.9)" />
-            <stop offset="100%" stopColor="oklch(0.7 0.18 245 / 0)" />
+            <stop offset="0%" stopColor="oklch(0.7 0.18 28 / 0)" />
+            <stop offset="50%" stopColor="oklch(0.75 0.18 28 / 0.9)" />
+            <stop offset="100%" stopColor="oklch(0.7 0.18 28 / 0)" />
           </linearGradient>
         </defs>
 
@@ -835,7 +835,7 @@ function OperationalCore({ labels }: { labels: string[] }) {
         <polygon
           points={nodes.map((n) => `${n.x},${n.y}`).join(" ")}
           fill="none"
-          stroke="oklch(0.6 0.1 245 / 0.25)"
+          stroke="oklch(0.6 0.1 28 / 0.25)"
           strokeWidth="1"
           strokeDasharray="3 5"
           className="net-line"
@@ -844,7 +844,7 @@ function OperationalCore({ labels }: { labels: string[] }) {
 
         {/* center hub */}
         <circle cx={cx} cy={cy} r="34" fill="url(#hubGrad)" className="net-node" style={{ animationDelay: "200ms" }} />
-        <circle cx={cx} cy={cy} r="34" fill="none" stroke="oklch(0.85 0.14 240 / 0.6)" strokeWidth="1" />
+        <circle cx={cx} cy={cy} r="34" fill="none" stroke="oklch(0.85 0.14 28 / 0.6)" strokeWidth="1" />
         <text x={cx} y={cy + 4} textAnchor="middle" fontSize="10" fill="oklch(0.98 0 0)" style={{ letterSpacing: "0.18em" }}>
           AAMIDA
         </text>
@@ -954,7 +954,7 @@ function DiagnosisVisual() {
       <div className="absolute inset-0 rounded-3xl glass-strong p-5">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_oklch(0.75_0.18_150)]" />
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_oklch(0.75_0.18_28)]" />
             <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Diagnostics · live</span>
           </div>
           <span className="text-[10px] text-muted-foreground">v.0 / scan</span>
@@ -974,16 +974,16 @@ function DiagnosisVisual() {
           <svg viewBox="0 0 300 120" className="h-28 w-full">
             <defs>
               <linearGradient id="areaG" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="oklch(0.7 0.18 245 / 0.6)" />
-                <stop offset="100%" stopColor="oklch(0.7 0.18 245 / 0)" />
+                <stop offset="0%" stopColor="oklch(0.7 0.18 28 / 0.6)" />
+                <stop offset="100%" stopColor="oklch(0.7 0.18 28 / 0)" />
               </linearGradient>
             </defs>
             <path d="M0 90 L40 70 L80 78 L120 50 L160 60 L200 30 L240 42 L300 20 L300 120 L0 120 Z" fill="url(#areaG)" />
-            <path d="M0 90 L40 70 L80 78 L120 50 L160 60 L200 30 L240 42 L300 20" fill="none" stroke="oklch(0.85 0.14 240)" strokeWidth="2" />
+            <path d="M0 90 L40 70 L80 78 L120 50 L160 60 L200 30 L240 42 L300 20" fill="none" stroke="oklch(0.85 0.14 28)" strokeWidth="2" />
             {[
               [40, 70], [120, 50], [200, 30], [300, 20],
             ].map(([x, y], i) => (
-              <circle key={i} cx={x} cy={y} r="3" fill="oklch(0.95 0.06 240)" />
+              <circle key={i} cx={x} cy={y} r="3" fill="oklch(0.95 0.06 28)" />
             ))}
           </svg>
         </div>
@@ -1086,7 +1086,7 @@ function Program({ t }: { t: TT }) {
               <span className="pb-2 text-sm text-muted-foreground">{t.dir === "rtl" ? "أشهر" : "months"}</span>
             </div>
             <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/5">
-              <div className="h-full w-1/3 rounded-full bg-gradient-to-r from-primary to-[oklch(0.85_0.14_240)] shadow-[0_0_12px_oklch(0.7_0.18_245)]" />
+              <div className="h-full w-1/3 rounded-full bg-gradient-to-r from-primary to-[oklch(0.85_0.14_28)] shadow-[0_0_12px_oklch(0.7_0.18_28)]" />
             </div>
             <div className="mt-2 flex justify-between text-[10px] uppercase tracking-wider text-muted-foreground">
               <span>M1</span><span>M2</span><span>M3</span>
@@ -1140,7 +1140,7 @@ function Timeline({ t }: { t: TT }) {
                     <ul className="mt-3 space-y-2">
                       {p.out.map((x, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                          <span className="mt-2 h-1 w-1 rounded-full bg-primary shadow-[0_0_6px_oklch(0.7_0.18_245)]" />
+                          <span className="mt-2 h-1 w-1 rounded-full bg-primary shadow-[0_0_6px_oklch(0.7_0.18_28)]" />
                           <span>{x}</span>
                         </li>
                       ))}
@@ -1232,7 +1232,7 @@ function Pillars({ t }: { t: TT }) {
                 <div className={`absolute -bottom-20 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-primary/30 blur-3xl transition-opacity duration-500 ${open ? "opacity-100" : "opacity-40"}`} />
 
                 <div className="relative flex items-center justify-between">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary/40 to-transparent text-foreground shadow-[inset_0_1px_0_oklch(1_0_0/0.1)]">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary/40 to-transparent text-foreground shadow-[inset_0_1px_0_oklch(1_0_0_/_0.1)]">
                     <Icon d={pillarIcons[i]} />
                   </div>
                   <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
@@ -1332,7 +1332,7 @@ function Process({ t }: { t: TT }) {
         {t.process.steps.map((s, i) => (
           <Reveal key={i} as="li" delay={i * 70}>
             <div className="group flex h-full items-center gap-3 rounded-2xl glass p-4 transition-all hover:-translate-y-0.5 hover:glow-ring">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.55_0.18_250)] text-xs font-bold text-primary-foreground shadow-[0_0_16px_-4px_oklch(0.65_0.18_245/0.7)]">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.55_0.18_28)] text-xs font-bold text-primary-foreground shadow-[0_0_16px_-4px_oklch(0.65_0.18_28_/_0.7)]">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="text-sm text-foreground">{s}</span>
@@ -1501,7 +1501,7 @@ function BookingForm({ t, lang }: { t: TT; lang: Lang }) {
               </div>
             </div>
 
-            <button type="submit" className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_250)] px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_245/0.7)] transition hover:-translate-y-0.5 hover:shadow-[0_0_45px_-4px_oklch(0.72_0.2_245/0.9)] sm:w-auto">
+            <button type="submit" className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_28)] px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_28_/_0.7)] transition hover:-translate-y-0.5 hover:shadow-[0_0_45px_-4px_oklch(0.72_0.2_28_/_0.9)] sm:w-auto">
               <Icon d={I.whatsapp} className="h-4 w-4" />
               {t.form.submit}
               <Icon d={I.arrow} className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
@@ -1536,12 +1536,12 @@ function FinalCta({ t }: { t: TT }) {
       <Reveal variant="scale">
         <div className="relative overflow-hidden rounded-3xl glass-strong px-6 py-16 lg:px-14 lg:py-24">
           <div className="pointer-events-none absolute inset-0 dot-bg opacity-[0.06]" />
-          <div className="pointer-events-none absolute -top-32 left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.2_245/0.4),transparent_70%)] blur-3xl" />
+          <div className="pointer-events-none absolute -top-32 left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.2_28_/_0.4),transparent_70%)] blur-3xl" />
           <div className="relative max-w-3xl">
             <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-gradient">{t.finalCta.title}</h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">{t.finalCta.desc}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_250)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_245/0.7)] transition hover:-translate-y-0.5">
+              <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-primary to-[oklch(0.58_0.18_28)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-4px_oklch(0.65_0.18_28_/_0.7)] transition hover:-translate-y-0.5">
                 {t.cta.book}
                 <Icon d={I.arrow} className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               </a>
