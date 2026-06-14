@@ -398,7 +398,7 @@ function Hero() {
             className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
             style={{ animationDelay: "100ms" }}
           >
-            رحلة تغيير حقيقية !!!
+            رحلة تغيير حقيقية
             <br />
             لمتجرك خلال 90 يوماً
           </h1>
