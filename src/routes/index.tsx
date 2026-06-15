@@ -646,7 +646,7 @@ function Pillars() {
                     key={p.t}
                     type="button"
                     onClick={() => setActive(isActive ? null : i)}
-                    className="flex flex-1 flex-col items-center gap-1.5 text-center transition"
+                    className="animate-pillar flex flex-1 flex-col items-center gap-1.5 text-center transition"
                     style={{
                       opacity: started ? 1 : 0,
                       transform: started ? "translateY(0)" : "translateY(6px)",
@@ -732,7 +732,7 @@ function Journey() {
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {JOURNEY.map((j, i) => (
             <Reveal key={j.month} delay={i * 120}>
-              <div className="relative h-full rounded-2xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-6 transition hover:border-[#0D1B3E]/25 hover:bg-white sm:p-8">
+              <div className="journey-card relative h-full rounded-2xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-6 transition hover:border-[#0D1B3E]/25 hover:bg-white sm:p-8">
                 <div className="flex items-center justify-between gap-3">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0D1B3E] text-[10px] font-bold text-[#F8F7F4]">
                     {String(i + 1).padStart(2, "0")}
@@ -787,7 +787,7 @@ function SystemService() {
                 {SYSTEM_FEATURES.map((f, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2.5 rounded-xl border border-[#0D1B3E]/10 bg-white px-3.5 py-2.5 text-sm text-[#1F2937]"
+                    className="feature-pill flex items-center gap-2.5 rounded-xl border border-[#0D1B3E]/10 bg-white px-3.5 py-2.5 text-sm text-[#1F2937]"
                   >
                     <ICheck className="h-4 w-4 shrink-0 text-[#0D1B3E]/70" />
                     {f}
