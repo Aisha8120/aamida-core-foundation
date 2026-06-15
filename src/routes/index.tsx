@@ -362,11 +362,11 @@ function Header() {
           <span className="truncate text-base font-bold text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-          <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
-          <a href="#journey" className="hover:text-[#0D1B3E] transition">رحلة التغيير</a>
-          <a href="#system" className="hover:text-[#0D1B3E] transition">النظام التشغيلي</a>
-          <a href="#why" className="hover:text-[#0D1B3E] transition">لماذا أعمدة</a>
-          <a href="#contact" className="hover:text-[#0D1B3E] transition">تواصل</a>
+          <a href="#pillars" className="nav-link transition hover:text-[#0D1B3E]">الأعمدة الخمسة</a>
+          <a href="#journey" className="nav-link transition hover:text-[#0D1B3E]">رحلة التغيير</a>
+          <a href="#system" className="nav-link transition hover:text-[#0D1B3E]">النظام التشغيلي</a>
+          <a href="#why" className="nav-link transition hover:text-[#0D1B3E]">لماذا أعمدة</a>
+          <a href="#contact" className="nav-link transition hover:text-[#0D1B3E]">تواصل</a>
         </nav>
         <a
           href="#contact"
@@ -443,14 +443,14 @@ function Hero() {
         </div>
 
         {/* Hero collage — interactive floating composition */}
-        <div className="relative mx-auto w-full max-w-md">
+        <div className="animate-fade-up relative mx-auto w-full max-w-md" style={{ animationDelay: "420ms" }}>
           <div className="group relative">
             <span aria-hidden className="absolute -top-4 right-6 h-20 w-20 rounded-full bg-[#0D1B3E]/10 blur-2xl transition-all duration-700 group-hover:scale-125" />
             <span aria-hidden className="absolute -bottom-6 -left-4 h-28 w-28 rounded-full bg-[#0D1B3E]/15 blur-2xl transition-all duration-700 group-hover:-translate-x-2" />
             <span aria-hidden className="absolute right-2 top-10 h-3 w-3 rounded-full bg-[#0D1B3E] opacity-70 transition-transform duration-700 group-hover:translate-y-2" />
             <span aria-hidden className="absolute -left-1 top-1/3 h-2 w-2 rounded-full bg-[#0D1B3E]/50 transition-transform duration-700 group-hover:-translate-y-2" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-[#0D1B3E]/10 bg-gradient-to-br from-white to-[#F8F7F4] p-2 shadow-[0_40px_90px_-40px_rgba(13,27,62,0.5)] transition-all duration-700 hover:-translate-y-1.5 hover:shadow-[0_50px_110px_-40px_rgba(13,27,62,0.6)]">
+            <div className="float-card relative overflow-hidden rounded-[2rem] border border-[#0D1B3E]/10 bg-gradient-to-br from-white to-[#F8F7F4] p-2 shadow-[0_40px_90px_-40px_rgba(13,27,62,0.5)] transition-all duration-700 hover:-translate-y-1.5 hover:shadow-[0_50px_110px_-40px_rgba(13,27,62,0.6)]">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[1.5rem]">
                 <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgba(13,27,62,0.06),transparent_75%)]" />
                 <img
