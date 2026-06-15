@@ -51,7 +51,6 @@
 :root {
   --radius: 0.875rem;
 
-  /* Aamida — Ivory × Deep Indigo */
   --ivory: #F8F7F4;
   --indigo: #0D1B3E;
   --accent-yellow: #E8B43A;
@@ -133,27 +132,238 @@
           mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 80%);
 }
 
+/* ============================================================
+   REVEAL — Scroll-triggered base
+   ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-@keyframes pillar-rise {
-  0% { transform: translateY(40px) scaleY(0.5); opacity: 0; }
-  100% { transform: translateY(0) scaleY(1); opacity: 1; }
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-@utility animate-pillar { animation: pillar-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* Slide from right variant */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale-in variant */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================================
+   HERO FADE-UP
+   ============================================================ */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-@utility animate-fade-up { animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
+/* ============================================================
+   TYPEWRITER
+   ============================================================ */
+.typewriter-wrap {
+  display: inline-block;
+  overflow: hidden;
+}
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-left: 2px solid var(--indigo);
+  animation:
+    typing 2.4s steps(30, end) both,
+    cursor-blink 0.75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+@keyframes cursor-blink {
+  0%, 100% { border-color: var(--indigo); }
+  50%       { border-color: transparent; }
+}
+.typewriter.done {
+  border-color: transparent;
+  animation: none;
+  width: 100%;
+}
+
+/* ============================================================
+   PARTICLES CANVAS
+   ============================================================ */
+#particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   FLOATING CARDS
+   ============================================================ */
+.float-card {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s ease;
+}
+.float-card:hover {
+  transform: translateY(-8px) rotate(-0.5deg) scale(1.015);
+  box-shadow: 0 32px 72px -30px rgba(13, 27, 62, 0.45);
+}
+
+/* Journey month cards */
+.journey-card {
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px -28px rgba(13, 27, 62, 0.35);
+}
+
+/* Outcome grid items */
+.outcome-item {
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+.outcome-item:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* System feature pills */
+.feature-pill {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.3s ease,
+    background-color 0.25s ease;
+}
+.feature-pill:hover {
+  transform: translateX(-4px);
+  border-color: rgba(13, 27, 62, 0.35);
+  background-color: #fff;
+}
+
+/* ============================================================
+   PILLAR BARS
+   ============================================================ */
+@keyframes pillar-rise {
+  0%   { transform: scaleY(0); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+@utility animate-pillar {
+  animation: pillar-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: bottom;
+}
+
+/* ============================================================
+   NUMBER COUNTER
+   ============================================================ */
+.stat-number {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   FLOATING WHATSAPP PULSE
+   ============================================================ */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(13, 27, 62, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(13, 27, 62, 0); }
+}
+.wa-float {
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   HEADER NAV LINK UNDERLINE
+   ============================================================ */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--indigo);
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ============================================================
+   STAGGER CHILDREN helper
+   ============================================================ */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stagger.is-visible > *:nth-child(1)  { opacity:1; transform:translateY(0); transition-delay: 0ms; }
+.stagger.is-visible > *:nth-child(2)  { opacity:1; transform:translateY(0); transition-delay: 80ms; }
+.stagger.is-visible > *:nth-child(3)  { opacity:1; transform:translateY(0); transition-delay: 160ms; }
+.stagger.is-visible > *:nth-child(4)  { opacity:1; transform:translateY(0); transition-delay: 240ms; }
+.stagger.is-visible > *:nth-child(5)  { opacity:1; transform:translateY(0); transition-delay: 320ms; }
+.stagger.is-visible > *:nth-child(6)  { opacity:1; transform:translateY(0); transition-delay: 400ms; }
+.stagger.is-visible > *:nth-child(7)  { opacity:1; transform:translateY(0); transition-delay: 480ms; }
+.stagger.is-visible > *:nth-child(8)  { opacity:1; transform:translateY(0); transition-delay: 560ms; }
+.stagger.is-visible > *:nth-child(9)  { opacity:1; transform:translateY(0); transition-delay: 640ms; }
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1 !important; transform: none !important; }
+  .reveal, .reveal-right, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   .animate-pillar, .animate-fade-up { animation: none !important; }
+  .typewriter { animation: none !important; width: 100%; border-color: transparent; }
+  .float-card:hover, .journey-card:hover, .outcome-item:hover, .feature-pill:hover {
+    transform: none;
+  }
+  .stagger > * { opacity: 1 !important; transform: none !important; }
+  .wa-float { animation: none; }
 }
