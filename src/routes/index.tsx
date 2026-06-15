@@ -838,8 +838,8 @@ function Outcomes() {
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {OUTCOMES.map((item, i) => (
-            <Reveal key={i} delay={i * 60}>
-              <div className="flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
+            <Reveal key={i} delay={i * 60} variant="reveal-scale">
+              <div className="outcome-item flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
                 <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0D1B3E] text-[#F8F7F4]">
                   <ICheck className="h-3.5 w-3.5" />
                 </span>
@@ -880,7 +880,7 @@ function Why() {
             </div>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} variant="reveal-right">
             <div className="relative h-full">
               <div aria-hidden className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
               <VisualCard src={WHY_VISUAL.src} title={WHY_VISUAL.t} rotate="rotate-1" />
@@ -1052,7 +1052,7 @@ function FloatingWhatsApp() {
       target="_blank"
       rel="noreferrer"
       aria-label="تواصل واتساب"
-      className="fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5"
+      className="wa-float fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5"
     >
       <IWa className="h-5 w-5" />
     </a>
