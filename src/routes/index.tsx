@@ -148,6 +148,14 @@ function useReveal<T extends HTMLElement = HTMLDivElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const show = () => el.classList.add("is-visible");
+
+    if (typeof IntersectionObserver === "undefined") {
+      const t = window.setTimeout(show, 80);
+      return () => window.clearTimeout(t);
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -169,16 +177,18 @@ function Reveal({
   children,
   delay = 0,
   className = "",
+  variant = "reveal",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  variant?: "reveal" | "reveal-right" | "reveal-scale";
 }) {
   const ref = useReveal<HTMLDivElement>();
   return (
     <div
       ref={ref}
-      className={`reveal ${className}`}
+      className={`${variant} ${className}`}
       style={{ ["--reveal-delay" as any]: `${delay}ms` }}
     >
       {children}
@@ -352,11 +362,11 @@ function Header() {
           <span className="truncate text-base font-bold text-[#0D1B3E]">{BRAND_AR}</span>
         </a>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-          <a href="#pillars" className="hover:text-[#0D1B3E] transition">الأعمدة الخمسة</a>
-          <a href="#journey" className="hover:text-[#0D1B3E] transition">رحلة التغيير</a>
-          <a href="#system" className="hover:text-[#0D1B3E] transition">النظام التشغيلي</a>
-          <a href="#why" className="hover:text-[#0D1B3E] transition">لماذا أعمدة</a>
-          <a href="#contact" className="hover:text-[#0D1B3E] transition">تواصل</a>
+          <a href="#pillars" className="nav-link transition hover:text-[#0D1B3E]">الأعمدة الخمسة</a>
+          <a href="#journey" className="nav-link transition hover:text-[#0D1B3E]">رحلة التغيير</a>
+          <a href="#system" className="nav-link transition hover:text-[#0D1B3E]">النظام التشغيلي</a>
+          <a href="#why" className="nav-link transition hover:text-[#0D1B3E]">لماذا أعمدة</a>
+          <a href="#contact" className="nav-link transition hover:text-[#0D1B3E]">تواصل</a>
         </nav>
         <a
           href="#contact"
@@ -433,14 +443,14 @@ function Hero() {
         </div>
 
         {/* Hero collage — interactive floating composition */}
-        <div className="relative mx-auto w-full max-w-md">
+        <div className="animate-fade-up relative mx-auto w-full max-w-md" style={{ animationDelay: "420ms" }}>
           <div className="group relative">
             <span aria-hidden className="absolute -top-4 right-6 h-20 w-20 rounded-full bg-[#0D1B3E]/10 blur-2xl transition-all duration-700 group-hover:scale-125" />
             <span aria-hidden className="absolute -bottom-6 -left-4 h-28 w-28 rounded-full bg-[#0D1B3E]/15 blur-2xl transition-all duration-700 group-hover:-translate-x-2" />
             <span aria-hidden className="absolute right-2 top-10 h-3 w-3 rounded-full bg-[#0D1B3E] opacity-70 transition-transform duration-700 group-hover:translate-y-2" />
             <span aria-hidden className="absolute -left-1 top-1/3 h-2 w-2 rounded-full bg-[#0D1B3E]/50 transition-transform duration-700 group-hover:-translate-y-2" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-[#0D1B3E]/10 bg-gradient-to-br from-white to-[#F8F7F4] p-2 shadow-[0_40px_90px_-40px_rgba(13,27,62,0.5)] transition-all duration-700 hover:-translate-y-1.5 hover:shadow-[0_50px_110px_-40px_rgba(13,27,62,0.6)]">
+            <div className="float-card relative overflow-hidden rounded-[2rem] border border-[#0D1B3E]/10 bg-gradient-to-br from-white to-[#F8F7F4] p-2 shadow-[0_40px_90px_-40px_rgba(13,27,62,0.5)] transition-all duration-700 hover:-translate-y-1.5 hover:shadow-[0_50px_110px_-40px_rgba(13,27,62,0.6)]">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[1.5rem]">
                 <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(closest-side,rgba(13,27,62,0.06),transparent_75%)]" />
                 <img
@@ -636,7 +646,7 @@ function Pillars() {
                     key={p.t}
                     type="button"
                     onClick={() => setActive(isActive ? null : i)}
-                    className="flex flex-1 flex-col items-center gap-1.5 text-center transition"
+                    className="animate-pillar flex flex-1 flex-col items-center gap-1.5 text-center transition"
                     style={{
                       opacity: started ? 1 : 0,
                       transform: started ? "translateY(0)" : "translateY(6px)",
@@ -722,7 +732,7 @@ function Journey() {
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {JOURNEY.map((j, i) => (
             <Reveal key={j.month} delay={i * 120}>
-              <div className="relative h-full rounded-2xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-6 transition hover:border-[#0D1B3E]/25 hover:bg-white sm:p-8">
+              <div className="journey-card relative h-full rounded-2xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-6 transition hover:border-[#0D1B3E]/25 hover:bg-white sm:p-8">
                 <div className="flex items-center justify-between gap-3">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0D1B3E] text-[10px] font-bold text-[#F8F7F4]">
                     {String(i + 1).padStart(2, "0")}
@@ -777,7 +787,7 @@ function SystemService() {
                 {SYSTEM_FEATURES.map((f, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2.5 rounded-xl border border-[#0D1B3E]/10 bg-white px-3.5 py-2.5 text-sm text-[#1F2937]"
+                    className="feature-pill flex items-center gap-2.5 rounded-xl border border-[#0D1B3E]/10 bg-white px-3.5 py-2.5 text-sm text-[#1F2937]"
                   >
                     <ICheck className="h-4 w-4 shrink-0 text-[#0D1B3E]/70" />
                     {f}
@@ -828,8 +838,8 @@ function Outcomes() {
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {OUTCOMES.map((item, i) => (
-            <Reveal key={i} delay={i * 60}>
-              <div className="flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
+            <Reveal key={i} delay={i * 60} variant="reveal-scale">
+              <div className="outcome-item flex items-start gap-3 rounded-xl border border-[#0D1B3E]/10 bg-[#F8F7F4] p-4 transition hover:border-[#0D1B3E]/30 hover:bg-white">
                 <span className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0D1B3E] text-[#F8F7F4]">
                   <ICheck className="h-3.5 w-3.5" />
                 </span>
@@ -870,7 +880,7 @@ function Why() {
             </div>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} variant="reveal-right">
             <div className="relative h-full">
               <div aria-hidden className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(13,27,62,0.10),transparent_70%)]" />
               <VisualCard src={WHY_VISUAL.src} title={WHY_VISUAL.t} rotate="rotate-1" />
@@ -1042,7 +1052,7 @@ function FloatingWhatsApp() {
       target="_blank"
       rel="noreferrer"
       aria-label="تواصل واتساب"
-      className="fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5"
+      className="wa-float fixed bottom-5 left-5 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#0D1B3E] text-[#F8F7F4] shadow-[0_15px_40px_-15px_rgba(13,27,62,0.6)] transition hover:-translate-y-0.5"
     >
       <IWa className="h-5 w-5" />
     </a>
