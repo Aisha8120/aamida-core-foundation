@@ -45,6 +45,7 @@
   --color-ring-offset-background: var(--background);
   --color-ivory: var(--ivory);
   --color-indigo: var(--indigo);
+  --color-accent-yellow: var(--accent-yellow);
 }
 
 :root {
@@ -53,8 +54,9 @@
   /* Aamida — Ivory × Deep Indigo */
   --ivory: #F8F7F4;
   --indigo: #0D1B3E;
+  --accent-yellow: #E8B43A;
 
-  --background: #F8F7F4;
+  --background: #F4F0E6;
   --foreground: #1F2937;
 
   --card: #FFFFFF;
@@ -87,9 +89,18 @@
   html, body {
     font-family: var(--font-sans);
     background-color: var(--color-background);
+    background-image: url('/__l5e/assets-v1/2f0f7138-0003-4ee4-b98e-5805d79f6d9f/paper-bg.jpg');
+    background-repeat: repeat;
+    background-size: 600px auto;
+    background-attachment: fixed;
     color: var(--color-foreground);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+  .text-accent-yellow { color: var(--accent-yellow); }
+  .hl-yellow {
+    background: linear-gradient(transparent 65%, rgba(232, 180, 58, 0.45) 65%);
+    padding: 0 0.15em;
   }
   h1, h2, h3, h4 {
     color: var(--indigo);

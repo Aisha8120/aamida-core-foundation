@@ -398,9 +398,9 @@ function Hero() {
             className="animate-fade-up mt-6 text-3xl font-bold leading-[1.25] sm:text-5xl lg:text-[56px] lg:leading-[1.15]"
             style={{ animationDelay: "100ms" }}
           >
-            رحلة تغيير حقيقية
+            رحلة <span className="hl-yellow">تغيير حقيقية</span>
             <br />
-            لمتجرك خلال 90 يوماً
+            لمتجرك خلال <span className="text-accent-yellow">90 يوماً</span>
           </h1>
           <p
             className="animate-fade-up mt-6 max-w-xl text-base leading-loose text-muted-foreground sm:text-lg"
@@ -408,8 +408,8 @@ function Hero() {
           >
             ليست استشارة تُسلّم في ملف PDF ثم تنتهي.
             <br />
-            في {BRAND_AR} نرافق متجرك خلال رحلة تمتد لثلاثة أشهر نبدأ فيها بفهم الواقع الحالي، وتشخيص
-            التحديات التشغيلية، ثم بناء نظام عمل واضح يساعد الفريق على العمل بكفاءة أكبر واتخاذ قرارات
+            في <span className="font-bold text-accent-yellow">{BRAND_AR}</span> نرافق متجرك خلال رحلة تمتد لثلاثة أشهر نبدأ فيها بفهم الواقع الحالي، وتشخيص
+            التحديات التشغيلية، ثم بناء <span className="hl-yellow">نظام عمل واضح</span> يساعد الفريق على العمل بكفاءة أكبر واتخاذ قرارات
             أفضل.
           </p>
           <div
