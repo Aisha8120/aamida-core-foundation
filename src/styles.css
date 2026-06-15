@@ -99,8 +99,18 @@
   }
   .text-accent-yellow { color: var(--accent-yellow); }
   .hl-yellow {
-    background: linear-gradient(transparent 65%, rgba(232, 180, 58, 0.45) 65%);
+    position: relative;
+    display: inline-block;
     padding: 0 0.15em;
+    isolation: isolate;
+  }
+  .hl-yellow::before {
+    content: "";
+    position: absolute;
+    inset: 0.1em 0 0.15em 0;
+    background: rgba(232, 180, 58, 0.55);
+    z-index: -1;
+    border-radius: 2px;
   }
   h1, h2, h3, h4 {
     color: var(--indigo);
