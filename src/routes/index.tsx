@@ -148,6 +148,14 @@ function useReveal<T extends HTMLElement = HTMLDivElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const show = () => el.classList.add("is-visible");
+
+    if (typeof IntersectionObserver === "undefined") {
+      const t = window.setTimeout(show, 80);
+      return () => window.clearTimeout(t);
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -169,16 +177,18 @@ function Reveal({
   children,
   delay = 0,
   className = "",
+  variant = "reveal",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  variant?: "reveal" | "reveal-right" | "reveal-scale";
 }) {
   const ref = useReveal<HTMLDivElement>();
   return (
     <div
       ref={ref}
-      className={`reveal ${className}`}
+      className={`${variant} ${className}`}
       style={{ ["--reveal-delay" as any]: `${delay}ms` }}
     >
       {children}
